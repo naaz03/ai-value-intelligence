@@ -1,0 +1,6 @@
+[project]
+name = "ai-value-intelligence"
+version = "1.0.0"
+description = "Enterprise AI Value Realization and ROI Intelligence platform"
+python = ">=3.11"
+entrypoint = "app.py"

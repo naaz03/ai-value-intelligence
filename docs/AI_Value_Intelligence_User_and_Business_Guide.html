@@ -1,0 +1,610 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>AI Value Intelligence — User &amp; Business Guide</title>
+  <style>
+    :root {
+      --teal: #0F6E6B;
+      --teal-dark: #0A4F4D;
+      --charcoal: #1F2A33;
+      --slate: #4A5560;
+      --muted: #6B7280;
+      --line: #E5E7EB;
+      --surface: #F7F5F2;
+      --card: #FFFFFF;
+      --amber: #C9842A;
+      --crimson: #9B3A3A;
+      --forest: #2F6B4F;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: "IBM Plex Sans", "Segoe UI", Helvetica, Arial, sans-serif;
+      color: var(--charcoal);
+      background: var(--surface);
+      line-height: 1.55;
+      font-size: 16px;
+    }
+    a { color: var(--teal-dark); }
+    .wrap { max-width: 980px; margin: 0 auto; padding: 0 28px 80px; }
+    header.cover {
+      background: var(--charcoal);
+      color: #F7F5F2;
+      padding: 64px 0 48px;
+    }
+    header.cover .wrap { padding-bottom: 0; }
+    .eyebrow {
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      font-size: 12px;
+      color: #9AD4D1;
+      font-weight: 600;
+    }
+    h1 {
+      font-family: "Source Serif 4", Georgia, "Times New Roman", serif;
+      font-size: 42px;
+      line-height: 1.15;
+      margin: 10px 0 8px;
+      letter-spacing: -0.02em;
+    }
+    .subtitle { font-size: 18px; color: #D6D3CD; margin: 0 0 28px; }
+    .meta { display: flex; flex-wrap: wrap; gap: 18px 28px; font-size: 13px; color: #C8C4BC; }
+    .meta strong { color: #fff; font-weight: 600; }
+    nav.toc {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-left: 4px solid var(--teal);
+      padding: 22px 26px;
+      margin: 32px 0 40px;
+    }
+    nav.toc h2 { margin-top: 0; font-size: 16px; }
+    nav.toc ol { columns: 2; margin: 0; padding-left: 20px; }
+    nav.toc li { margin: 4px 0; font-size: 14px; }
+    h2 {
+      font-family: "Source Serif 4", Georgia, serif;
+      font-size: 28px;
+      margin: 52px 0 12px;
+      padding-top: 8px;
+      border-top: 1px solid var(--line);
+    }
+    h3 {
+      font-family: "Source Serif 4", Georgia, serif;
+      font-size: 20px;
+      margin: 28px 0 8px;
+      color: var(--teal-dark);
+    }
+    h4 { margin: 20px 0 6px; font-size: 15px; letter-spacing: 0.02em; }
+    p.lead { font-size: 18px; color: var(--slate); }
+    .callout {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-left: 4px solid var(--teal);
+      padding: 14px 18px;
+      margin: 16px 0;
+    }
+    .callout.warn { border-left-color: var(--amber); }
+    .callout.risk { border-left-color: var(--crimson); }
+    .grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; margin: 16px 0; }
+    .grid3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin: 16px 0; }
+    .card {
+      background: var(--card);
+      border: 1px solid var(--line);
+      padding: 14px 16px;
+    }
+    .card .k { font-size: 11px; text-transform: uppercase; letter-spacing: 0.06em; color: var(--muted); font-weight: 600; }
+    .card .v { font-family: Georgia, serif; font-size: 22px; margin-top: 4px; }
+    .card p { margin: 6px 0 0; font-size: 14px; color: var(--slate); }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background: var(--card);
+      font-size: 14px;
+      margin: 12px 0 20px;
+    }
+    th, td { border: 1px solid var(--line); padding: 8px 10px; text-align: left; vertical-align: top; }
+    th { background: #EFEBE4; font-size: 12px; text-transform: uppercase; letter-spacing: 0.04em; }
+    tr:nth-child(even) td { background: #FBF9F6; }
+    .chain {
+      display: flex; flex-wrap: wrap; gap: 6px; margin: 14px 0 6px;
+    }
+    .chain span {
+      background: var(--card);
+      border: 1px solid var(--line);
+      padding: 6px 10px;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--teal-dark);
+    }
+    .formula {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      background: #1F2A33;
+      color: #E8F4F3;
+      padding: 14px 16px;
+      font-size: 13px;
+      overflow-x: auto;
+      margin: 12px 0;
+    }
+    ul.tight li { margin: 4px 0; }
+    footer {
+      margin-top: 64px;
+      padding: 24px 0;
+      border-top: 1px solid var(--line);
+      font-size: 13px;
+      color: var(--muted);
+    }
+    .print-btn {
+      display: inline-block;
+      background: var(--teal);
+      color: #fff !important;
+      text-decoration: none;
+      padding: 8px 14px;
+      font-size: 13px;
+      font-weight: 600;
+    }
+    @media (max-width: 800px) {
+      h1 { font-size: 32px; }
+      nav.toc ol, .grid, .grid3 { columns: 1; grid-template-columns: 1fr; }
+    }
+    @media print {
+      body { background: #fff; font-size: 12px; }
+      header.cover { padding: 28px 0; }
+      .print-btn, nav.toc { display: none; }
+      h2 { break-before: page; border-top: none; }
+      h2:first-of-type { break-before: avoid; }
+      .card, .callout, table { break-inside: avoid; }
+    }
+  </style>
+</head>
+<body>
+  <header class="cover">
+    <div class="wrap">
+      <div class="eyebrow">Product documentation · Version 1.0</div>
+      <h1>AI Value Intelligence</h1>
+      <p class="subtitle">Measure Adoption. Prove Value. Optimize AI Investment.</p>
+      <div class="meta">
+        <div><strong>Audience</strong><br />Executives, Finance, AI Program Office, Technology, Procurement</div>
+        <div><strong>Demonstration enterprise</strong><br />Al Noor Holdings PJSC (synthetic)</div>
+        <div><strong>Currency</strong><br />USD</div>
+        <div><strong>Classification</strong><br />Internal demonstration asset</div>
+      </div>
+      <p style="margin:28px 0 0;"><a class="print-btn" href="#" onclick="window.print(); return false;">Print or save as PDF</a></p>
+    </div>
+  </header>
+
+  <div class="wrap">
+    <nav class="toc">
+      <h2>Contents</h2>
+      <ol>
+        <li><a href="#purpose">Why this platform exists</a></li>
+        <li><a href="#covers">What the application covers</a></li>
+        <li><a href="#start">Getting started</a></li>
+        <li><a href="#navigate">How to navigate and filter</a></li>
+        <li><a href="#personas">Personas and who should look at what</a></li>
+        <li><a href="#framework">The AI value framework</a></li>
+        <li><a href="#pages">Page-by-page user guide</a></li>
+        <li><a href="#metrics">Metric dictionary</a></li>
+        <li><a href="#roi">ROI and cost methodology</a></li>
+        <li><a href="#enterprise">The synthetic enterprise</a></li>
+        <li><a href="#synthesis">How the data is synthesized</a></li>
+        <li><a href="#snapshot">Illustrative portfolio snapshot</a></li>
+        <li><a href="#walkthrough">Suggested demo walkthrough</a></li>
+        <li><a href="#patterns">Designed patterns in the demo data</a></li>
+        <li><a href="#model">Data model</a></li>
+        <li><a href="#export">Exports and quality</a></li>
+        <li><a href="#future">Future real-data integration</a></li>
+        <li><a href="#limits">Limitations and disclaimer</a></li>
+        <li><a href="#faq">FAQ</a></li>
+        <li><a href="#appendix">Appendix: install, regenerate, test</a></li>
+      </ol>
+    </nav>
+
+    <h2 id="purpose">1. Why this platform exists</h2>
+    <p class="lead">Organizations are spending heavily on Microsoft 365 Copilot, GitHub Copilot, ChatGPT Enterprise, Azure OpenAI, enterprise assistants, custom agents, infrastructure, training, and governance. Senior leadership still struggles to answer whether that spend is producing measurable business value.</p>
+    <p>Typical questions this product is built to answer:</p>
+    <ul class="tight">
+      <li>How much are we spending on AI, and on what?</li>
+      <li>Which tools are actually used, and which licenses sit idle?</li>
+      <li>Which departments adopt quickly, and which over-license?</li>
+      <li>Which use cases create operational improvement versus cash?</li>
+      <li>How much of Potential value becomes Demonstrated, then Realized?</li>
+      <li>What is portfolio ROI, payback, and net benefit?</li>
+      <li>What should we scale, optimize, reassess, or stop?</li>
+    </ul>
+    <div class="callout warn">
+      <strong>This release is a demonstration.</strong> All figures belong to a fictional GCC holding company, Al Noor Holdings PJSC. They are realistic and internally consistent, but they are not a real client residual and must not be presented as such.
+    </div>
+
+    <h2 id="covers">2. What the application covers</h2>
+    <p>The platform is an end-to-end <strong>AI value-management system</strong>, not a usage dashboard. It follows one chain:</p>
+    <div class="chain">
+      <span>Investment</span><span>Availability</span><span>Adoption</span><span>Effective usage</span>
+      <span>Operational improvement</span><span>Demonstrated benefit</span><span>Financial realization</span>
+      <span>Realized value</span><span>ROI</span>
+    </div>
+    <div class="grid">
+      <div class="card"><div class="k">Investment</div><p>Licenses, infrastructure, implementation, training, support, security, governance — by product, vendor, unit, and use case.</p></div>
+      <div class="card"><div class="k">Adoption</div><p>Eligible, licensed, and active users; power / regular / occasional / inactive / never-activated / abandoned segments; training lift.</p></div>
+      <div class="card"><div class="k">Use-case portfolio</div><p>Registry of 84 initiatives with status, risk, owners, value, ROI, and Scale / Optimize / Monitor / Reassess / Stop actions.</p></div>
+      <div class="card"><div class="k">Productivity</div><p>Before/after task time, quality, rework, hours saved, and FTE capacity — kept separate from cash.</p></div>
+      <div class="card"><div class="k">Value realization</div><p>Potential → Demonstrated → Realized waterfall, leakage, finance validation, and benefit type.</p></div>
+      <div class="card"><div class="k">Optimization &amp; decisions</div><p>Idle licenses, overlapping tools, department index, 12–36 month scenarios, and an interactive executive simulator.</p></div>
+    </div>
+    <p>The application deliberately does <em>not</em> treat prompts as productivity, usage as value, hours saved as cash, or adoption as ROI.</p>
+
+    <h2 id="start">3. Getting started</h2>
+    <h3>Start the application</h3>
+    <div class="formula">cd ai_audit
+source .venv/bin/activate
+streamlit run app.py</div>
+    <p>Open the URL Streamlit prints, typically <strong>http://localhost:8501</strong>. No API keys are required. On first launch the synthetic dataset is created automatically if it is missing.</p>
+    <h3>First ten minutes</h3>
+    <ol>
+      <li>Stay on <strong>Executive Overview</strong> and read the KPI strip.</li>
+      <li>Set the sidebar <strong>Persona</strong> to your role. Numbers do not change; emphasis and insight order do.</li>
+      <li>Leave filters empty for the group view, then restrict Date or Business unit to see the same KPIs recompute.</li>
+      <li>Open <strong>Value Realization</strong> for the Potential → Demonstrated → Realized waterfall.</li>
+      <li>Open <strong>License Optimization</strong> for unused-seat recommendations calculated from the register.</li>
+      <li>Open <strong>AI Value Simulator</strong> and move the realization slider to see why hours are not automatically cash.</li>
+    </ol>
+
+    <h2 id="navigate">4. How to navigate and filter</h2>
+    <p>The left sidebar is the control surface for every analytical page.</p>
+    <table>
+      <thead><tr><th>Control</th><th>What it does</th></tr></thead>
+      <tbody>
+        <tr><td>Persona</td><td>Reorders KPI emphasis and executive insights. The metric engine is unchanged.</td></tr>
+        <tr><td>Date range</td><td>Limits monthly facts (investment, value, usage trends) to the selected period.</td></tr>
+        <tr><td>Organization</td><td>Business unit, department, country, job level.</td></tr>
+        <tr><td>AI portfolio</td><td>Product, vendor, use case, use-case status, risk rating.</td></tr>
+      </tbody>
+    </table>
+    <div class="callout">
+      Filters persist as you move between pages. Empty selections mean “all.” Charts, tables, insights, and license recommendations all recompute from the current filter — they are not hard-coded sentences.
+    </div>
+
+    <h2 id="personas">5. Personas and who should look at what</h2>
+    <table>
+      <thead><tr><th>Persona</th><th>Primary questions</th><th>Start here</th></tr></thead>
+      <tbody>
+        <tr><td>CEO / Executive Committee</td><td>Net benefit, ROI, payback, what to scale or stop</td><td>Executive Overview, Value Realization, Simulator</td></tr>
+        <tr><td>CFO</td><td>Realized vs validated value, cost completeness, payback</td><td>ROI, Value Realization, Investment</td></tr>
+        <tr><td>CIO / CTO</td><td>Platform spend, adoption, idle licenses, unit cost</td><td>Investment, Adoption, License Optimization</td></tr>
+        <tr><td>Chief AI Officer</td><td>Portfolio health, P→D→R conversion, use-case actions</td><td>Use Case Portfolio, Value Realization</td></tr>
+        <tr><td>Business Unit Head</td><td>My unit’s value, adoption, weak use cases</td><td>Filter to the unit, then Overview and Benchmarking</td></tr>
+        <tr><td>Finance</td><td>Benefit register, validated share, cost categories</td><td>Value Realization, Data Explorer</td></tr>
+        <tr><td>AI Program Office</td><td>Status, risk, Scale vs Stop, realization tracking</td><td>Portfolio, Forecasting</td></tr>
+        <tr><td>Technology</td><td>Usage, infrastructure / token cost, engineering ROI</td><td>Adoption, Investment, Productivity</td></tr>
+        <tr><td>Data &amp; Analytics</td><td>Measurement integrity, leakage, hours vs cash</td><td>Productivity, Data Explorer</td></tr>
+        <tr><td>Procurement / Vendor Management</td><td>Vendor spend, unused seats, commercial optimization</td><td>License Optimization, Investment</td></tr>
+      </tbody>
+    </table>
+
+    <h2 id="framework">6. The AI value framework</h2>
+    <p>Three value concepts are kept distinct everywhere in the product.</p>
+    <div class="grid3">
+      <div class="card">
+        <div class="k">Potential value</div>
+        <p>Theoretical benefit from use-case assumptions at steady state, ramped by time in production. It is a planning number, not evidence.</p>
+      </div>
+      <div class="card">
+        <div class="k">Demonstrated value</div>
+        <p>Benefit supported by operational evidence (time saved, quality, capacity, task volume). Still not booked cash.</p>
+      </div>
+      <div class="card">
+        <div class="k">Realized value</div>
+        <p>Benefit captured by the enterprise after a realization factor. A subset is flagged finance-validated.</p>
+      </div>
+    </div>
+    <p>The product enforces <strong>Potential ≥ Demonstrated ≥ Realized</strong>. Conversion rates are:</p>
+    <div class="formula">Potential-to-Demonstrated % = Demonstrated / Potential
+Demonstrated-to-Realized % = Realized / Demonstrated
+Overall value realization % = Realized / Potential</div>
+    <p>Hours saved become FTE capacity using 1,880 working hours per year. Hours become money <em>only</em> when a realization factor is applied (default 35% in the simulator). That is how the product avoids “we saved 100,000 hours, therefore we saved $X.”</p>
+
+    <h2 id="pages">7. Page-by-page user guide</h2>
+
+    <h3>7.1 Executive Overview</h3>
+    <p>Landing page for investment-committee conversations. Shows portfolio KPIs, investment versus realized value, ROI trend, the P→D→R funnel, adoption, spend and value by business unit, top and bottom use cases, a value-versus-ROI bubble matrix, and a deterministic insight engine (Key findings, Value opportunities, Optimization, Management attention, Recommended actions).</p>
+    <p><strong>How to use it:</strong> Set persona, confirm net benefit and realization %, then open the insight tabs before drilling into a unit or product.</p>
+
+    <h3>7.2 AI Investment</h3>
+    <p>Explains the cost stack: license, infrastructure, implementation, training, support, security, and governance. Cuts spend by product, vendor, business unit, department, and use case, with a monthly cost trend and a callout of the largest driver.</p>
+    <p><strong>How to use it:</strong> Look for infrastructure growing faster than seats (token-heavy platforms) and implementation spikes on failed or retired initiatives.</p>
+
+    <h3>7.3 Adoption Intelligence</h3>
+    <p>Separates <em>eligible</em>, <em>licensed</em>, and <em>active</em> populations. Segments users into Power, Regular, Occasional, Inactive, Never Activated, and Abandoned. Compares average sessions for trained versus untrained staff and adoption by department, unit, country, job level, and product.</p>
+    <p><strong>How to use it:</strong> High licensed counts with low adoption are a commercial problem, not a success story. Filter Legal or Human Resources to see over-licensing.</p>
+
+    <h3>7.4 Use Case Portfolio</h3>
+    <p>Enterprise registry: owner, department, status, investment, risk, Potential / Demonstrated / Realized, ROI, payback. Each use case is classified:</p>
+    <table>
+      <thead><tr><th>Action</th><th>Typical signal</th></tr></thead>
+      <tbody>
+        <tr><td>Scale</td><td>Strong realized value and high ROI; ready for wider rollout</td></tr>
+        <tr><td>Optimize</td><td>Positive ROI but weak realization — fix capture, not just usage</td></tr>
+        <tr><td>Monitor</td><td>Early stage or balanced performance; no scale decision yet</td></tr>
+        <tr><td>Reassess</td><td>Negative ROI or high cost with little realized value while still live</td></tr>
+        <tr><td>Stop</td><td>Retired, paused, or clearly value-destructive</td></tr>
+      </tbody>
+    </table>
+    <p>The bubble chart plots realized value (x) against ROI (y); bubble size is investment; color is classification.</p>
+
+    <h3>7.5 Productivity Intelligence</h3>
+    <p>Before/after task minutes, quality scores, rework, hours released, and FTE equivalent. An on-page realization slider shows a <em>scenario</em> conversion of hours to money. The booked realized value on the KPI strip still comes from the benefit register, not from hours × wage.</p>
+    <p><strong>How to use it:</strong> Use this page to discuss operational improvement. Do not copy the “if fully cashed” figure into a finance paper.</p>
+
+    <h3>7.6 Value Realization</h3>
+    <p>Waterfall: Potential → evidence adjustment → Demonstrated → realization adjustment → Realized → AI costs → Net AI value. Also shows finance-validated versus unvalidated realized value, and value by benefit type (cost avoidance, cost reduction, revenue, capacity, productivity, quality, risk).</p>
+
+    <h3>7.7 ROI Intelligence</h3>
+    <p>Portfolio and use-case ROI using realized value only. Includes net benefit, benefit-cost ratio, payback, cost per active user, cost per AI task, cost per hour saved, realized value per user, and realized value per $1 of spend.</p>
+
+    <h3>7.8 License Optimization</h3>
+    <p>A commercial page. Identifies never-activated, abandoned, 30/60/90-day inactive, and overlapping-product seats. KPIs: current annualized license spend, optimized spend, savings, and optimization %. Recommendations are generated from the filtered license register (for example, a department with 60+ day inactivity and a dollar opportunity).</p>
+
+    <h3>7.9 Department Benchmarking</h3>
+    <p>AI Value Index (0–100) ranking departments on seven min-max normalized dimensions: adoption, usage, productivity, realized value, ROI, training, and use-case success. The score is a <em>relative ranking in the current filter</em>, not an absolute grade. The methodology is in an expander on the page.</p>
+
+    <h3>7.10 Forecasting</h3>
+    <p>12–36 month Conservative, Base, and Accelerated scenarios for spend, realized value, ROI, and adoption. These are trend extrapolations with scenario drift — labeled as planning views, not predictions.</p>
+
+    <h3>7.11 AI Value Simulator</h3>
+    <p>Interactive executive model. Levers: license count and price, adoption, hours saved per user, hourly cost, realization %, use-case success rate, infrastructure, training, implementation, and support/security/governance. Outputs: projected cost, gross productivity value, demonstrated, realized, net benefit, ROI, payback, and break-even users.</p>
+    <p><strong>How to use it:</strong> Hold cost fixed and move only realization % to show the committee why “hours saved” is not a P&amp;L line.</p>
+
+    <h3>7.12 Data Explorer</h3>
+    <p>Inspect the marts and registers that power the UI, run integrity checks, sample employee-level usage, and export CSV. Use this when Finance asks “what sits under that KPI?”</p>
+
+    <h2 id="metrics">8. Metric dictionary</h2>
+    <table>
+      <thead><tr><th>Metric</th><th>Definition</th><th>Notes</th></tr></thead>
+      <tbody>
+        <tr><td>Total AI investment / cost</td><td>Sum of license, infrastructure, implementation, training, support, security, governance in the filter</td><td>Used as the ROI denominator</td></tr>
+        <tr><td>Potential value</td><td>Expected annual value ÷ 12 × ramp × seasonality</td><td>Planning assumption</td></tr>
+        <tr><td>Demonstrated value</td><td>Potential × evidence factor</td><td>Operational evidence</td></tr>
+        <tr><td>Realized value</td><td>Demonstrated × realization factor</td><td>Only this enters ROI</td></tr>
+        <tr><td>Finance-validated value</td><td>Realized amount flagged as finance-validated</td><td>Higher for cost avoidance / reduction</td></tr>
+        <tr><td>Net AI benefit</td><td>Realized − Total cost</td><td>Can be negative</td></tr>
+        <tr><td>Portfolio ROI</td><td>(Realized − Cost) / Cost</td><td>Not (Potential − Cost) / Cost</td></tr>
+        <tr><td>Benefit-cost ratio</td><td>Realized / Cost</td><td>&gt;1 means benefits exceed cost</td></tr>
+        <tr><td>Payback (months)</td><td>Cost / average monthly realized value</td><td>Blank if realized is zero</td></tr>
+        <tr><td>Eligible users</td><td>Employees in the current org filter</td><td>Not all are licensed</td></tr>
+        <tr><td>Licensed users</td><td>Distinct employees with at least one license</td><td>Snapshot as-of latest month</td></tr>
+        <tr><td>Active users</td><td>Licensed employees not Inactive / Never Activated / Abandoned</td><td></td></tr>
+        <tr><td>Adoption rate</td><td>Active / Licensed</td><td></td></tr>
+        <tr><td>Activation rate</td><td>Licensed / Eligible</td><td></td></tr>
+        <tr><td>Hours saved</td><td>Sampled (baseline − AI-assisted minutes) × tasks</td><td>Not cash</td></tr>
+        <tr><td>FTE capacity</td><td>Hours saved / 1,880</td><td>Capacity, not headcount reduction</td></tr>
+        <tr><td>Underutilized licenses</td><td>Inactive + Never Activated + Abandoned seats</td><td></td></tr>
+        <tr><td>Optimization opportunity</td><td>Annualized cost of those seats</td><td>Reassignment / reduction candidate</td></tr>
+      </tbody>
+    </table>
+
+    <h2 id="roi">9. ROI and cost methodology</h2>
+    <div class="formula">Total AI Cost = License + Infrastructure + Implementation + Training + Support + Security + Governance
+
+ROI              = (Realized Financial Benefit − Total AI Cost) / Total AI Cost
+Net benefit      = Realized − Total AI Cost
+Benefit-cost     = Realized / Total AI Cost
+Payback months   = Total AI Cost / Average monthly realized value
+Cost / active user, / task, / hour saved
+Realized / AI user and Realized / $1 AI spend</div>
+    <p>Gross productivity value in the simulator is hours × wage. That figure is labeled as such and is reduced by use-case success rate and realization % before it is called realized value.</p>
+
+    <h2 id="enterprise">10. The synthetic enterprise</h2>
+    <p><strong>Al Noor Holdings PJSC</strong> is a fictional UAE-headquartered diversified group. No real employee, customer, or client data is used. Identifiers are synthetic (<code>EMP-000001</code>, <code>UC-001</code>). Owners are role titles (for example, Group Chief Financial Officer), not personal names.</p>
+    <div class="grid3">
+      <div class="card"><div class="k">Employees</div><div class="v">12,000</div></div>
+      <div class="card"><div class="k">AI-licensed employees</div><div class="v">~5,600</div></div>
+      <div class="card"><div class="k">History</div><div class="v">36 months</div></div>
+      <div class="card"><div class="k">Business units</div><div class="v">12</div></div>
+      <div class="card"><div class="k">Departments</div><div class="v">28</div></div>
+      <div class="card"><div class="k">Use cases</div><div class="v">84</div></div>
+    </div>
+    <h3>Countries</h3>
+    <p>UAE (headquarters, largest share), Saudi Arabia, Qatar, Bahrain, Oman, Kuwait.</p>
+    <h3>Business units</h3>
+    <table>
+      <thead><tr><th>Unit</th><th>Approx. staff</th><th>Executive owner (role)</th></tr></thead>
+      <tbody>
+        <tr><td>Corporate</td><td>480</td><td>Group Chief of Staff</td></tr>
+        <tr><td>Finance</td><td>920</td><td>Group Chief Financial Officer</td></tr>
+        <tr><td>Human Resources</td><td>520</td><td>Group Chief People Officer</td></tr>
+        <tr><td>Technology</td><td>1,680</td><td>Group Chief Technology Officer</td></tr>
+        <tr><td>Operations</td><td>3,600</td><td>Group Chief Operating Officer</td></tr>
+        <tr><td>Procurement</td><td>400</td><td>Group Chief Procurement Officer</td></tr>
+        <tr><td>Legal</td><td>220</td><td>Group General Counsel</td></tr>
+        <tr><td>Customer Service</td><td>1,800</td><td>Group Head of Customer Experience</td></tr>
+        <tr><td>Sales</td><td>1,520</td><td>Group Chief Commercial Officer</td></tr>
+        <tr><td>Marketing</td><td>480</td><td>Group Chief Marketing Officer</td></tr>
+        <tr><td>Risk &amp; Compliance</td><td>320</td><td>Group Chief Risk Officer</td></tr>
+        <tr><td>Internal Audit</td><td>140</td><td>Group Chief Audit Executive</td></tr>
+      </tbody>
+    </table>
+    <h3>AI products in the demo</h3>
+    <table>
+      <thead><tr><th>Product</th><th>Vendor</th><th>Category</th><th>Commercial model</th></tr></thead>
+      <tbody>
+        <tr><td>Microsoft 365 Copilot</td><td>Microsoft</td><td>Productivity copilot</td><td>$30 / user / month</td></tr>
+        <tr><td>GitHub Copilot</td><td>GitHub</td><td>Developer copilot</td><td>$19 / user / month</td></tr>
+        <tr><td>ChatGPT Enterprise</td><td>OpenAI</td><td>Enterprise LLM</td><td>$60 / user / month</td></tr>
+        <tr><td>Azure OpenAI</td><td>Microsoft</td><td>Model platform</td><td>Consumption (tokens)</td></tr>
+        <tr><td>Noor Assist</td><td>Al Noor Digital</td><td>Enterprise assistant</td><td>$12 / user / month</td></tr>
+        <tr><td>Noor Agent Platform</td><td>Al Noor Digital</td><td>Custom AI agent</td><td>Platform + use case</td></tr>
+      </tbody>
+    </table>
+    <p>Industry is Diversified Holdings. Illustrative annual revenue is $4.85B. AI strategy maturity is set to <strong>Scaling</strong>.</p>
+
+    <h2 id="synthesis">11. How the data is synthesized</h2>
+    <p>The dataset is not a pile of independent random numbers. Generators share one deterministic seed (<strong>42</strong>) and encode relationships so analysis produces believable business patterns.</p>
+    <h3>Design principles</h3>
+    <ul class="tight">
+      <li>Employees who complete training are more likely to activate and run deeper sessions.</li>
+      <li>Job family drives product mix: engineering toward GitHub Copilot; corporate functions toward M365 Copilot; customer service toward Noor Assist.</li>
+      <li>Frequent users save more minutes, but hours are not auto-converted to cash.</li>
+      <li>Realization varies by department and benefit type (Procurement cost-avoidance is captured more readily than Marketing content productivity).</li>
+      <li>New use cases ramp; some remain pilots, some fail, some scale.</li>
+      <li>July–August usage and value dip (GCC summer).</li>
+      <li>Company-wide training campaigns at months 8, 18, and 27 lift activation.</li>
+      <li>Some staff receive overlapping products; some abandon after one or two months; some never activate.</li>
+      <li>Executives have fewer sessions and longer session duration than analysts.</li>
+      <li>Azure OpenAI token volume and compute cost rise through the history.</li>
+    </ul>
+    <h3>Grain and performance</h3>
+    <p>Facts are <strong>monthly</strong>, not daily. Employee-level usage is stored, then rolled into marts that the pages query. Productivity is a measured sample of users per use case, not a census of every task. That keeps the application laptop-fast while still feeling enterprise-scale (~205k usage rows, ~12k employees).</p>
+    <h3>What is fictional — and what is methodologically real</h3>
+    <p>Names, IDs, and dollar amounts are invented. The <em>method</em> is the point of the demonstration: a value chain, a three-tier value model, a complete cost stack, license hygiene, and a refusal to equate activity with money. Those methods are intended to transfer to a real enterprise when adapters replace the synthetic source.</p>
+
+    <h2 id="snapshot">12. Illustrative portfolio snapshot</h2>
+    <p>After generation with seed 42, an unfiltered full-history view is on this order. Re-generation with the same seed reproduces the same relationships; exact cents can move only if generator code changes.</p>
+    <div class="grid3">
+      <div class="card"><div class="k">Potential value</div><div class="v">$93.7M</div></div>
+      <div class="card"><div class="k">Demonstrated value</div><div class="v">$61.1M</div></div>
+      <div class="card"><div class="k">Realized value</div><div class="v">$29.3M</div></div>
+      <div class="card"><div class="k">Total AI cost</div><div class="v">$19.6M</div></div>
+      <div class="card"><div class="k">Net benefit</div><div class="v">$9.7M</div></div>
+      <div class="card"><div class="k">Portfolio ROI</div><div class="v">49.5%</div></div>
+      <div class="card"><div class="k">Payback</div><div class="v">~23 mo</div></div>
+      <div class="card"><div class="k">Hours saved</div><div class="v">89k</div><p>~47 FTE capacity — not booked as $89k × wage</p></div>
+      <div class="card"><div class="k">License opportunity</div><div class="v">$0.79M</div><p>Annualized idle / abandoned / never-activated seats</p></div>
+    </div>
+    <p>Overall realization is roughly 31% of potential. That leakage is the management message: the organization can show activity and even operational evidence without having captured the cash.</p>
+
+    <h2 id="walkthrough">13. Suggested demo walkthrough</h2>
+    <p>A 20-minute narrative that works with executives and does not require spoiling every hidden story.</p>
+    <ol>
+      <li><strong>Frame the problem (2 min).</strong> “We can see spend and we can see prompts. We cannot see realized value.” Show the value chain on Executive Overview.</li>
+      <li><strong>Portfolio truth (4 min).</strong> Potential $94M, realized $29M, cost $20M, ROI ~50%. Emphasize that ROI uses realized value only.</li>
+      <li><strong>Leakage (3 min).</strong> Value Realization waterfall. Ask: where did the missing $32M of demonstrated-but-unrealized benefit go?</li>
+      <li><strong>Adoption is not value (3 min).</strong> Filter Marketing: high usage, weak cash. Filter Procurement: modest adoption, strong cost-avoidance ROI.</li>
+      <li><strong>License hygiene (3 min).</strong> License Optimization — Legal and HR idle seats, overlapping Copilot + ChatGPT, dollar opportunity.</li>
+      <li><strong>Portfolio actions (3 min).</strong> Use Case Portfolio — cheap AP invoice triage versus the retired Executive briefing agent.</li>
+      <li><strong>Decision (2 min).</strong> Simulator: change realization % and license count. Close on Scale / Optimize / Stop, not “buy more seats.”</li>
+    </ol>
+
+    <h2 id="patterns">14. Designed patterns in the demo data</h2>
+    <p>These patterns are engineered so a walkthrough feels like a real diagnostic. They are not printed as a checklist inside the application. Users should discover them with filters.</p>
+    <table>
+      <thead><tr><th>#</th><th>Pattern</th><th>Where to look</th></tr></thead>
+      <tbody>
+        <tr><td>1</td><td>Technology + GitHub Copilot shows high adoption and strong ROI</td><td>Filter Technology / GitHub Copilot; code completion and PR review</td></tr>
+        <tr><td>2</td><td>Legal is over-licensed with weak activation</td><td>Adoption and License Optimization → Legal</td></tr>
+        <tr><td>3</td><td>Finance improves after training campaigns</td><td>Adoption training chart; FP&amp;A commentary use cases</td></tr>
+        <tr><td>4</td><td>Customer Service automates high task volume</td><td>Productivity and CS reply assist / routing</td></tr>
+        <tr><td>5</td><td>Marketing generates usage with little realized cash</td><td>Value Realization by unit; campaign copy use cases</td></tr>
+        <tr><td>6</td><td>Procurement has modest adoption and excellent ROI</td><td>ROI by business unit; supplier bid comparison</td></tr>
+        <tr><td>7</td><td>HR carries many inactive licenses</td><td>License Optimization → Human Resources</td></tr>
+        <tr><td>8</td><td>An expensive agent pilot fails</td><td>Portfolio → Executive briefing agent (Retired)</td></tr>
+        <tr><td>9</td><td>A cheap automation produces exceptional ROI</td><td>Portfolio → AP invoice exception triage</td></tr>
+        <tr><td>10</td><td>Usage dips in July–August</td><td>Adoption / investment trend in summer months</td></tr>
+        <tr><td>11</td><td>Training campaigns lift activation</td><td>Adoption after training; months 8, 18, 27</td></tr>
+        <tr><td>12</td><td>Some departments over-license</td><td>Legal and HR coverage versus active use</td></tr>
+        <tr><td>13</td><td>A high performer scales</td><td>Pull request review assist (Scaling / Scale)</td></tr>
+        <tr><td>14</td><td>Token consumption lifts infrastructure cost</td><td>Investment → infrastructure / Azure OpenAI</td></tr>
+        <tr><td>15</td><td>Realized value trails demonstrated productivity</td><td>P→D→R funnel on every portfolio view</td></tr>
+        <tr><td>16</td><td>Overlapping tools on the same employee</td><td>License Optimization → overlapping products</td></tr>
+        <tr><td>17</td><td>Executives use AI differently from analysts</td><td>Adoption by job level</td></tr>
+        <tr><td>18</td><td>Some users experiment and abandon</td><td>Abandoned segment</td></tr>
+      </tbody>
+    </table>
+
+    <h2 id="model">15. Data model</h2>
+    <table>
+      <thead><tr><th>Table</th><th>Grain</th><th>Role</th></tr></thead>
+      <tbody>
+        <tr><td>organizations</td><td>One group</td><td>Al Noor Holdings header</td></tr>
+        <tr><td>business_units / departments</td><td>12 units / 28 departments</td><td>Org hierarchy and cost centers</td></tr>
+        <tr><td>employees</td><td>Person (synthetic ID)</td><td>Job, country, pay rate, training</td></tr>
+        <tr><td>ai_products / licenses</td><td>Product; employee × product</td><td>Availability and seat cost</td></tr>
+        <tr><td>ai_usage</td><td>Employee × product × month</td><td>Sessions, prompts, tokens, activity</td></tr>
+        <tr><td>ai_use_cases</td><td>Initiative</td><td>Registry, status, expected value</td></tr>
+        <tr><td>productivity_metrics</td><td>Sampled employee × use case × month</td><td>Before/after operational evidence</td></tr>
+        <tr><td>financial_benefits / ai_costs</td><td>Use case × month</td><td>P / D / R values and full cost stack</td></tr>
+        <tr><td>mart_*</td><td>Month × enterprise / unit / dept / product / use case</td><td>Fast page queries</td></tr>
+      </tbody>
+    </table>
+    <p>Use-case statuses: Idea, Assessment, Pilot, Production, Scaling, Paused, Retired. Benefit types: Cost Avoidance, Cost Reduction, Revenue Increase, Capacity Release, Productivity, Quality Improvement, Risk Reduction.</p>
+
+    <h2 id="export">16. Exports and quality</h2>
+    <p>Where practical, pages offer CSV download for filtered KPIs, the use-case registry, license opportunities, department benchmarking, the benefit register, simulator scenarios, forecasts, and executive findings.</p>
+    <p>Data Explorer runs automated checks: primary-key uniqueness, nulls, invalid dates, negative money, orphan foreign keys, status enums, and Potential ≥ Demonstrated ≥ Realized. The generated dataset is required to pass these checks. Automated tests live in <code>tests/</code> (<code>pytest -q</code>).</p>
+
+    <h2 id="future">17. Future real-data integration</h2>
+    <p>The metric engine does not depend on Faker. A <code>SourceAdapter</code> protocol defines loaders for employees, licenses, usage, use cases, productivity, benefits, and costs. Only the synthetic adapter is implemented. A later program would map:</p>
+    <table>
+      <thead><tr><th>Enterprise source</th><th>Typical mapping</th></tr></thead>
+      <tbody>
+        <tr><td>Microsoft Graph / M365 Copilot usage</td><td>Licenses, usage, department</td></tr>
+        <tr><td>GitHub Copilot metrics</td><td>Developer usage</td></tr>
+        <tr><td>Azure OpenAI / Foundry telemetry</td><td>Tokens, infrastructure cost</td></tr>
+        <tr><td>Fabric, Power BI, Databricks, Snowflake</td><td>Warehouse facts</td></tr>
+        <tr><td>ServiceNow</td><td>Demand / use-case register</td></tr>
+        <tr><td>SAP / Oracle finance</td><td>Actuals, cost centers, validated benefits</td></tr>
+        <tr><td>Workday / HRIS</td><td>Employees, jobs, cost rates</td></tr>
+        <tr><td>Procurement systems</td><td>Vendor contracts and unit prices</td></tr>
+        <tr><td>Custom apps and agents</td><td>Task telemetry and quality</td></tr>
+      </tbody>
+    </table>
+    <p>No fake connectors are shipped. Do not describe the demo as “integrated to Microsoft 365.”</p>
+
+    <h2 id="limits">18. Limitations and disclaimer</h2>
+    <div class="callout risk">
+      <strong>Not a client residual.</strong> Do not present Al Noor figures as another organization’s results. Do not use this guide as investment, accounting, or audit advice.
+    </div>
+    <ul class="tight">
+      <li>All money is synthetic and directional. Currency is USD for vendor-comparable AI spend.</li>
+      <li>Monthly grain; no true daily telemetry.</li>
+      <li>Productivity is sampled, not a full task census.</li>
+      <li>Forecasts are scenarios, not guaranteed predictions.</li>
+      <li>No authentication, row-level security, or write-back.</li>
+      <li>License optimization is an analytical opportunity, not an instruction to terminate employment.</li>
+      <li>FTE capacity is released time, not an automatic FTE reduction.</li>
+    </ul>
+
+    <h2 id="faq">19. FAQ</h2>
+    <h4>Why is realized value so much lower than potential?</h4>
+    <p>By design. Evidence is incomplete, and even evidenced hours are only partly converted into captured benefit. That is the management problem the product exists to show.</p>
+    <h4>Why don’t hours saved match realized dollars?</h4>
+    <p>Because they must not. Hours are operational. Cash requires a realization factor, a benefit type that finance can recognize, and often a process change (backfill, avoided hire, or reduced third-party spend).</p>
+    <h4>Do persona changes alter the numbers?</h4>
+    <p>No. They change which KPIs are featured first and how insights are ordered.</p>
+    <h4>Can two pages disagree?</h4>
+    <p>They should not. Portfolio KPIs are computed from the same use-case monthly mart. Data Explorer shows the reconciliation totals.</p>
+    <h4>Is this ready for a named client?</h4>
+    <p>Not as a residual. It is ready as a method demonstration, a workshop artifact, and a blueprint for a later integration program.</p>
+
+    <h2 id="appendix">20. Appendix: install, regenerate, test</h2>
+    <h3>Install</h3>
+    <div class="formula">cd ai_audit
+python3 -m venv .venv
+source .venv/bin/activate
+pip install -r requirements.txt</div>
+    <h3>Regenerate the enterprise (reproducible)</h3>
+    <div class="formula">python -m generators.generate_all</div>
+    <p>Writes Parquet files and <code>data/generated/ai_value.duckdb</code>. Seed is 42.</p>
+    <h3>Test</h3>
+    <div class="formula">pytest -q</div>
+    <p>Covers ROI arithmetic, KPI reconciliation, the rule that hours are not automatically cash, and dataset integrity.</p>
+    <h3>Application map</h3>
+    <table>
+      <thead><tr><th>Path</th><th>Purpose</th></tr></thead>
+      <tbody>
+        <tr><td><code>app.py</code> and <code>pages/</code></td><td>Streamlit entry and 12 pages</td></tr>
+        <tr><td><code>views/</code></td><td>Page renderers</td></tr>
+        <tr><td><code>services/</code></td><td>Metric, ROI, optimization, forecast, insight engines</td></tr>
+        <tr><td><code>services/adapters/</code></td><td>Future source interface</td></tr>
+        <tr><td><code>generators/</code></td><td>Story-driven synthesizers</td></tr>
+        <tr><td><code>data/SYNTHETIC_STORIES.md</code></td><td>Developer key to hidden patterns</td></tr>
+      </tbody>
+    </table>
+
+    <footer>
+      AI Value Intelligence · User &amp; Business Guide · Demonstration dataset for Al Noor Holdings PJSC ·
+      Measure Adoption. Prove Value. Optimize AI Investment. · Not for use as a named-client residual.
+    </footer>
+  </div>
+</body>
+</html>
