@@ -158,7 +158,7 @@ footer {{ visibility: hidden; }}
 #MainMenu {{ visibility: hidden; }}
 
 .block-container {{
-  padding-top: 1.2rem;
+  padding-top: 1.6rem;
   padding-bottom: 2.5rem;
   max-width: 1400px;
 }}
@@ -174,12 +174,19 @@ footer {{ visibility: hidden; }}
 }}
 
 @media (max-width: 900px) {{
-  h1 {{ font-size: 1.4rem !important; }}
+  h1 {{
+    font-size: 1.4rem !important;
+    line-height: 1.3 !important;
+    padding-top: 0.35rem;
+  }}
   h2 {{ font-size: 1.15rem !important; }}
   .block-container {{
-    padding-left: 0.85rem;
-    padding-right: 0.85rem;
-    padding-top: 0.7rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    padding-top: 3.5rem !important;
+  }}
+  [data-testid="stHeader"] {{
+    min-height: 3rem;
   }}
   .kpi-card {{
     min-height: 0;
@@ -205,7 +212,16 @@ footer {{ visibility: hidden; }}
 }}
 
 @media (max-width: 560px) {{
-  h1 {{ font-size: 1.22rem !important; }}
+  h1 {{
+    font-size: 1.22rem !important;
+    margin-top: 0.2rem !important;
+    padding-top: 0.45rem;
+  }}
+  .block-container {{
+    padding-top: calc(4rem + env(safe-area-inset-top, 0px)) !important;
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }}
   .avi-brand {{ font-size: 1.15rem; }}
   .kpi-card {{ padding: 0.7rem 0.75rem; }}
   .kpi-label {{ font-size: 0.66rem; }}
