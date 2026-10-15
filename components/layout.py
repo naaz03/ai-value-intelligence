@@ -29,18 +29,7 @@ def bootstrap_page(page_title: str) -> None:
         st.markdown(f'<div class="avi-org">{SETTINGS.organization_name}</div>', unsafe_allow_html=True)
         st.divider()
         render_sidebar_filters()
-        _phone_access()
     st.title(page_title)
-
-
-def _phone_access() -> None:
-    from utils.helpers import lan_url
-
-    url = lan_url()
-    with st.expander("Open on a phone"):
-        st.caption("Same Wi-Fi as this computer. Tap the menu icon to open pages and filters.")
-        st.code(url, language="text")
-        st.caption("If it does not load, confirm the app was started with streamlit run app.py and that the Mac firewall allows incoming connections.")
 
 
 def page_note(text: str) -> None:

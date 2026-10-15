@@ -1,6 +1,5 @@
 from __future__ import annotations
 
-import socket
 from datetime import date
 from pathlib import Path
 
@@ -30,19 +29,6 @@ def add_months(start: date, months: int) -> date:
 def as_month(d: date | pd.Timestamp) -> date:
     ts = pd.Timestamp(d)
     return date(ts.year, ts.month, 1)
-
-
-def lan_url(port: int = 8501) -> str:
-    """LAN address so a phone on the same Wi-Fi can open the app."""
-    sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-    try:
-        sock.connect(("8.8.8.8", 80))
-        ip = sock.getsockname()[0]
-    except OSError:
-        ip = "127.0.0.1"
-    finally:
-        sock.close()
-    return f"http://{ip}:{port}"
 
 
 def weighted_choice(rng, items: list, weights: list):

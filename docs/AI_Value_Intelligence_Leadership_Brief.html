@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>AI Value Intelligence · Leadership Brief</title>
+<style>
+  @page { size: A4; margin: 0; }
+  :root{
+    --teal:#0F6E6B;--teal-d:#0A4F4D;--teal-l:#E8F2F1;--ink:#1F2A33;--slate:#4A5560;--muted:#6B7280;
+    --line:#E3E0DA;--bg:#F7F5F2;--amber:#C9842A;--crimson:#9B3A3A;--forest:#2F6B4F;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{width:210mm}
+  body{background:#fff;color:var(--ink);font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;
+       font-size:8.3pt;line-height:1.38;hyphens:none;-webkit-hyphens:none;
+       -webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .page{width:210mm;min-height:297mm;display:flex;flex-direction:column}
+
+  header{background:var(--ink);color:#F7F5F2;padding:10mm 14mm 8.5mm;position:relative}
+  header::after{content:"";position:absolute;left:0;right:0;bottom:0;height:1.6mm;
+       background:linear-gradient(90deg,var(--crimson) 0 33%,var(--teal) 33% 66%,var(--amber) 66% 100%)}
+  .eyebrow{font-size:6.8pt;letter-spacing:.16em;text-transform:uppercase;color:#9FD3CF;font-weight:700}
+  h1{font-family:Georgia,serif;font-size:23pt;font-weight:700;letter-spacing:-.02em;margin:1.6mm 0 .8mm}
+  .tag{font-size:10pt;color:#C9D1D6}
+  .hook{margin-top:3.2mm;display:flex;gap:6mm;align-items:flex-end}
+  .hook blockquote{font-family:Georgia,serif;font-size:12pt;font-style:italic;color:#fff;
+       border-left:2.5px solid var(--teal);padding-left:4mm;flex:1;line-height:1.32}
+  .hook .src{font-size:6.8pt;color:#9AA6AE;max-width:60mm;text-align:right;line-height:1.35}
+
+  main{padding:6mm 14mm 4mm;flex:1;display:flex;flex-direction:column;justify-content:space-between;gap:2.8mm}
+  h2{font-family:Georgia,serif;font-size:11pt;font-weight:700;margin-bottom:1.6mm;letter-spacing:-.01em}
+  .lbl{font-size:6.6pt;letter-spacing:.12em;text-transform:uppercase;font-weight:700;margin-bottom:1.2mm}
+
+  .intent{display:grid;grid-template-columns:30mm 1fr;gap:5mm;align-items:start;
+       border-left:3px solid var(--teal);padding:1mm 0 1mm 4mm}
+  .intent .lbl{color:var(--teal);margin-top:1mm}
+  .intent p{font-family:Georgia,serif;font-size:9.1pt;line-height:1.4}
+
+  .psa{display:grid;grid-template-columns:1fr 1fr 1fr;gap:4mm}
+  .psa > div{padding:3mm 3.4mm;background:var(--bg);border-top:2.4px solid}
+  .psa .p{border-color:var(--crimson)} .psa .p .lbl{color:var(--crimson)}
+  .psa .s{border-color:var(--teal)}    .psa .s .lbl{color:var(--teal)}
+  .psa .a{border-color:var(--amber)}   .psa .a .lbl{color:var(--amber)}
+  .psa p{font-family:Georgia,serif;font-size:8.3pt;line-height:1.36}
+
+  .two{display:grid;grid-template-columns:1fr 1fr;gap:6mm}
+
+  .tiers{display:grid;grid-template-columns:1fr;gap:1.4mm}
+  .tier{display:grid;grid-template-columns:27mm 1fr;align-items:stretch}
+  .tier .n{color:#fff;font-weight:700;font-size:7.4pt;padding:1.4mm 2.4mm;display:flex;align-items:center}
+  .tier .d{background:var(--bg);padding:1.4mm 2.6mm;font-size:7.4pt;color:var(--slate)}
+  .chain{display:flex;flex-wrap:wrap;gap:1.2mm;align-items:center;margin-top:.6mm}
+  .chain span{font-size:6.2pt;font-weight:700;letter-spacing:.05em;text-transform:uppercase;
+       background:var(--teal-l);color:var(--teal-d);padding:1mm 1.6mm}
+  .chain span.v{background:var(--teal);color:#fff}
+  .chain i{font-style:normal;color:var(--muted);font-size:7pt}
+  .decide{display:grid;grid-template-columns:repeat(5,1fr);gap:1.4mm;margin-top:.6mm}
+  .decide div{padding:1.6mm 1mm;text-align:center;color:#fff;font-size:6.4pt;letter-spacing:.08em;text-transform:uppercase;font-weight:700}
+
+  ul.ticks{list-style:none}
+  ul.ticks li{padding-left:4mm;position:relative;margin:.9mm 0}
+  ul.ticks li::before{content:"";position:absolute;left:0;top:1.3mm;width:1.8mm;height:1.8mm;background:var(--teal)}
+  ul.ticks b{color:var(--ink)}
+
+  .roles{display:grid;grid-template-columns:repeat(5,1fr);gap:2mm}
+  .role{border:1px solid var(--line);padding:2.4mm 2.6mm;border-top:2.4px solid var(--teal)}
+  .role .r{font-size:6.6pt;letter-spacing:.1em;text-transform:uppercase;font-weight:700;color:var(--teal-d)}
+  .role .q{font-family:Georgia,serif;font-size:7.9pt;line-height:1.32;margin-top:.8mm}
+
+  .lev{background:var(--ink);color:#E6EBEE;padding:3.8mm 5mm}
+  .lev h2{color:#fff}
+  .lev .sub{font-size:7.6pt;color:#AEB8BF;margin-bottom:2.6mm}
+  .path{display:grid;grid-template-columns:1fr 1fr 1fr;gap:2.6mm}
+  .path > div{border:1px solid #3A4752;padding:2.4mm 2.8mm;position:relative}
+  .path .n{font-size:6.4pt;letter-spacing:.1em;text-transform:uppercase;color:#9FD3CF;font-weight:700}
+  .path .t{font-family:Georgia,serif;font-size:9.4pt;color:#fff;margin:.6mm 0 .8mm}
+  .path .d{font-size:7.3pt;color:#AEB8BF;line-height:1.38}
+  .why{display:grid;grid-template-columns:repeat(4,1fr);gap:3mm;margin-top:2.6mm;padding-top:2.6mm;border-top:1px solid #3A4752}
+  .why b{display:block;color:#fff;font-size:7.6pt;margin-bottom:.6mm}
+  .why span{font-size:7.1pt;color:#AEB8BF;line-height:1.36;display:block}
+
+  .ask{display:grid;grid-template-columns:1.45fr 1fr;gap:6mm;align-items:center;
+       border:1.4px solid var(--teal);padding:2.8mm 4.4mm}
+  .ask .lbl{color:var(--teal)}
+  .ask p{font-family:Georgia,serif;font-size:9pt}
+  .ask ol{padding-left:4mm;font-size:8pt}
+  .ask ol li{margin:.5mm 0}
+
+  footer{padding:2.6mm 14mm 4mm;font-size:6.6pt;color:var(--muted);display:flex;justify-content:space-between;gap:6mm}
+</style>
+</head>
+<body>
+<div class="page">
+
+  <header>
+    <h1>AI Value Intelligence</h1>
+    <div class="tag">Measure adoption. Prove value. Optimize AI investment.</div>
+    <div class="hook">
+      <blockquote>“The AI gold rush is over. The audit has begun.” This product is that audit, built and working.</blockquote>    </div>
+  </header>
+
+  <main>
+
+    <section class="intent">
+      <div class="lbl">The intent</div>
+      <p>Give client leadership a clear and defensible answer to one question: <b>is our AI investment paying back, and where should the next dollar go?</b> And give us a working product, not a slide, that turns our AI value point of view into client conversations and paid engagements.</p>
+    </section>
+
+    <section class="psa">
+      <div class="p">
+        <div class="lbl">The problem</div>
+        <p>Every enterprise bought the licenses. Few can prove the return. Dashboards count prompts, active users and hours saved, yet none of these is ROI.</p>
+      </div>
+      <div class="s">
+        <div class="lbl">The solution</div>
+        <p>A platform that follows every AI dollar through to realized value, then tells leadership what to scale, fix or stop.</p>
+      </div>
+      <div class="a">
+        <div class="lbl">The approach</div>
+        <p>Keep potential, demonstrated and realized value separate. Count only realized value, measured against the <b>full</b> cost of AI, use case by use case.</p>
+      </div>
+    </section>
+
+    <section class="two">
+      <div>
+        <h2>How the product thinks</h2>
+        <div class="tiers">
+          <div class="tier"><div class="n" style="background:#7FB3AF">Potential</div><div class="d">What a use case could deliver on paper.</div></div>
+          <div class="tier"><div class="n" style="background:var(--teal)">Demonstrated</div><div class="d">Improvement we can evidence in operations.</div></div>
+          <div class="tier"><div class="n" style="background:var(--teal-d)">Realized</div><div class="d">Benefit actually captured. The only tier in ROI.</div></div>
+        </div>
+        <div class="lbl" style="margin-top:2.6mm;color:var(--slate)">The value chain it measures</div>
+        <div class="chain">
+          <span>Investment</span><i>→</i><span>Adoption</span><i>→</i><span>Usage</span><i>→</i>
+          <span>Ops gain</span><i>→</i><span>Demonstrated</span><i>→</i><span class="v">Realized</span><i>→</i><span class="v">ROI</span>
+        </div>
+        <div class="lbl" style="margin-top:2.6mm;color:var(--slate)">Every use case gets a decision</div>
+        <div class="decide">
+          <div style="background:var(--forest)">Scale</div>
+          <div style="background:var(--teal)">Optimize</div>
+          <div style="background:#6B7280">Monitor</div>
+          <div style="background:var(--amber)">Reassess</div>
+          <div style="background:var(--crimson)">Stop</div>
+        </div>
+      </div>
+      <div>
+        <h2>What it does today</h2>
+        <ul class="ticks">
+          <li><b>Executive overview:</b> spend against realized value, ROI, payback and value leakage.</li>
+          <li><b>Full cost of AI:</b> licenses, infrastructure, implementation, training, support, security and governance.</li>
+          <li><b>License optimization:</b> finds unused, underused and overlapping seats.</li>
+          <li><b>Portfolio view:</b> ROI by business unit and by use case.</li>
+          <li><b>Forecasts and a scenario simulator</b> to test investment choices.</li>
+          <li><b>Open methodology:</b> every formula explained and searchable, on desktop or mobile.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section>
+      <h2>How it becomes useful to each leader</h2>
+      <div class="roles">
+        <div class="role"><div class="r">CEO / MD</div><div class="q">Where is AI creating value, and where should we invest next?</div></div>
+        <div class="role"><div class="r">CFO</div><div class="q">What is the real return against the full cost, and when do we pay back?</div></div>
+        <div class="role"><div class="r">CIO / CTO</div><div class="q">Which licenses are idle, and what can we reclaim or right size?</div></div>
+        <div class="role"><div class="r">Chief AI Officer</div><div class="q">Which use cases to scale, and which to stop?</div></div>
+        <div class="role"><div class="r">Business heads</div><div class="q">Is AI improving my unit’s results, not just its activity?</div></div>
+      </div>
+    </section>
+
+    <section class="lev">
+      <h2>How we can take it to clients: a ready product we tailor, not a custom build</h2>
+      <div class="path">
+        <div><div class="n">Step 1 · Diagnostic</div><div class="t">AI Value Health Check</div><div class="d">Connect client license, usage, cost and finance data. Baseline adoption, ROI, value leakage and idle licenses.</div></div>
+        <div><div class="n">Step 2 · Program</div><div class="t">AI Value Realization Office</div><div class="d">Run the use case portfolio as an investment portfolio. Stage gates, business owners, scale the winners, stop the rest.</div></div>
+        <div><div class="n">Step 3 · Managed service</div><div class="t">Continuous AI Value Reporting</div><div class="d">Recurring executive and board reporting on AI return, refreshed as tools, pricing and usage change.</div></div>
+      </div>
+      <div class="why">
+        <div><b>Timely</b><span>Middle East boards have moved past Copilot pilots and now want proof of return.</span></div>
+        <div><b>Low cost to deliver</b><span>One reusable engine. Branding, data sources and KPIs adjust per client.</span></div>
+        <div><b>Differentiated</b><span>Turns our AI value thought leadership into a tool clients can use.</span></div>
+        <div><b>Credible</b><span>Never treats prompts, hours saved or adoption as ROI.</span></div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    <span>Live demo available on desktop and mobile.</span>
+    <span>Demo runs on fully synthetic enterprise data. No client data is used.</span>
+  </footer>
+
+</div>
+</body>
+</html>

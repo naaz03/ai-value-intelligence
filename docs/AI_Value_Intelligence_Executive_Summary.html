@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>AI Value Intelligence — Executive Summary</title>
+<style>
+  :root{
+    --teal:#0F6E6B;--teal-d:#0A4F4D;--ink:#1F2A33;--slate:#4A5560;--muted:#6B7280;
+    --line:#E5E7EB;--bg:#F7F5F2;--card:#FFFFFF;--amber:#C9842A;--crimson:#9B3A3A;--forest:#2F6B4F;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);
+       font-family:"IBM Plex Sans","Segoe UI",Helvetica,Arial,sans-serif;line-height:1.55}
+  .wrap{max-width:1120px;margin:0 auto;padding:0 24px}
+  header{background:var(--ink);color:#F7F5F2;padding:44px 0 76px}
+  .eyebrow{font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:#9FD3CF;font-weight:600}
+  h1{font-family:"Source Serif 4",Georgia,serif;font-size:2.3rem;line-height:1.15;margin:.4rem 0 .5rem;letter-spacing:-.02em}
+  .tag{color:#C9D1D6;font-size:1.02rem;margin:0}
+  .meta{display:flex;flex-wrap:wrap;gap:10px;margin-top:22px;align-items:center}
+  .chip{border:1px solid #3A4752;padding:5px 11px;font-size:.8rem;color:#DDE3E7}
+  .persona{display:flex;gap:6px;margin-left:auto;flex-wrap:wrap}
+  .persona button{background:transparent;border:1px solid #4A5762;color:#DDE3E7;padding:7px 12px;
+       font:600 .78rem "IBM Plex Sans",sans-serif;cursor:pointer;letter-spacing:.02em}
+  .persona button.on{background:var(--teal);border-color:var(--teal);color:#fff}
+  main{padding:0 0 60px}
+  section{margin-top:26px}
+  h2{font-family:"Source Serif 4",Georgia,serif;font-size:1.4rem;margin:0 0 .3rem;letter-spacing:-.01em}
+  .sub{color:var(--muted);font-size:.9rem;margin:0 0 14px}
+  .card{background:var(--card);border:1px solid var(--line)}
+
+  .hero{border-left:4px solid var(--teal);padding:22px 24px;margin-top:-48px;position:relative;
+        box-shadow:0 10px 30px rgba(31,42,51,.08)}
+  .lbl{font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;font-weight:700}
+  .lbl.p{color:var(--crimson)} .lbl.s{color:var(--teal)} .lbl.a{color:var(--amber)}
+  .hero p{font-family:"Source Serif 4",Georgia,serif;font-size:1.08rem;margin:.25rem 0 1rem}
+  .hero p:last-child{margin-bottom:0}
+
+  .kpis{display:grid;grid-template-columns:repeat(5,1fr);gap:12px}
+  .kpi{padding:14px 15px;border-top:3px solid var(--teal);transition:transform .15s}
+  .kpi:hover{transform:translateY(-2px)}
+  .kpi .k{font-size:.68rem;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);font-weight:600}
+  .kpi .v{font-family:"Source Serif 4",Georgia,serif;font-size:1.65rem;font-weight:650;margin-top:4px}
+  .kpi .h{font-size:.74rem;color:var(--slate)}
+  .kpi.focus{border-top-color:var(--ink)}
+
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  .pad{padding:18px 20px}
+
+  .chain{display:flex;flex-wrap:wrap;gap:6px}
+  .chain span{font-size:.72rem;font-weight:600;letter-spacing:.04em;text-transform:uppercase;
+       background:#EEF5F4;color:var(--teal-d);padding:6px 9px}
+  .chain i{color:var(--muted);font-style:normal;align-self:center}
+
+  .funnel .row{margin:10px 0}
+  .funnel .bar{height:40px;display:flex;align-items:center;justify-content:space-between;
+       padding:0 12px;color:#fff;font-weight:600;font-size:.88rem;transition:filter .15s}
+  .funnel .row:hover .bar{filter:brightness(1.08)}
+  .funnel .note{font-size:.76rem;color:var(--muted);margin-top:3px}
+
+  .toggle{display:flex;gap:6px;margin-bottom:12px;flex-wrap:wrap}
+  .toggle button{border:1px solid var(--line);background:#fff;padding:6px 11px;font:600 .76rem "IBM Plex Sans",sans-serif;cursor:pointer;color:var(--slate)}
+  .toggle button.on{background:var(--ink);color:#fff;border-color:var(--ink)}
+  .bu{display:grid;grid-template-columns:130px 1fr 74px;gap:10px;align-items:center;margin:7px 0;font-size:.84rem}
+  .bu .track{background:#F1EEE8;height:16px}
+  .bu .fill{height:100%;transition:width .45s ease}
+  .bu .val{text-align:right;font-variant-numeric:tabular-nums;font-weight:600}
+
+  .actions{display:grid;grid-template-columns:repeat(5,1fr);gap:8px}
+  .act{border:1px solid var(--line);background:#fff;padding:12px;cursor:pointer;text-align:left;font:inherit;transition:all .15s}
+  .act .n{font-family:"Source Serif 4",Georgia,serif;font-size:1.6rem;font-weight:650}
+  .act .t{font-size:.72rem;letter-spacing:.06em;text-transform:uppercase;font-weight:700}
+  .act .u{font-size:.72rem;color:var(--muted)}
+  .act.on{border-color:var(--ink);box-shadow:inset 0 0 0 1px var(--ink)}
+  .actdesc{margin-top:12px;padding:12px 14px;background:#F7F5F2;font-size:.9rem;min-height:50px}
+
+  table{width:100%;border-collapse:collapse;font-size:.85rem}
+  th{text-align:left;font-size:.68rem;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);padding:6px 4px;border-bottom:1px solid var(--line)}
+  td{padding:8px 4px;border-bottom:1px solid #F1EEE8}
+  .r{text-align:right;font-variant-numeric:tabular-nums}
+
+  .sim input{width:100%;accent-color:var(--teal)}
+  .simout{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:12px}
+  .simout div{background:#F7F5F2;padding:10px 12px}
+  .simout b{display:block;font-family:"Source Serif 4",Georgia,serif;font-size:1.3rem}
+  .simout span{font-size:.72rem;color:var(--muted);text-transform:uppercase;letter-spacing:.05em}
+
+  .insight{border-left:3px solid var(--teal);padding:10px 14px;margin:8px 0;background:#fff;font-size:.9rem}
+  .insight.w{border-left-color:var(--amber)} .insight.r{border-left-color:var(--crimson)}
+  .principles{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+  .principles div{padding:14px;font-size:.86rem}
+  .principles b{display:block;font-family:"Source Serif 4",Georgia,serif;font-size:1rem;margin-bottom:4px}
+  footer{color:var(--muted);font-size:.78rem;padding:24px 0 40px;margin-top:30px;border-top:1px solid var(--line)}
+
+  @media (max-width:900px){
+    .kpis{grid-template-columns:repeat(2,1fr)}
+    .grid2,.principles{grid-template-columns:1fr}
+    .actions{grid-template-columns:repeat(3,1fr)}
+    .persona{margin-left:0}
+  }
+  @media (max-width:560px){
+    h1{font-size:1.7rem}
+    .wrap{padding:0 16px}
+    .hero{padding:18px 16px}
+    .hero p{font-size:.98rem}
+    .kpi .v{font-size:1.35rem}
+    .actions{grid-template-columns:repeat(2,1fr)}
+    .bu{grid-template-columns:96px 1fr 62px;font-size:.78rem}
+    .simout{grid-template-columns:1fr}
+  }
+  @media print{
+    .persona,.toggle,.sim{display:none}
+    header{padding:24px 0 60px}
+    .hero{box-shadow:none}
+    section{break-inside:avoid}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <div class="eyebrow">Executive Summary · Al Noor Holdings PJSC</div>
+    <h1>AI Value Intelligence</h1>
+    <p class="tag">Measure Adoption. Prove Value. Optimize AI Investment.</p>
+    <div class="meta">
+      <span class="chip">UAE HQ · ~12,000 employees</span>
+      <span class="chip">36 months · USD</span>
+      <span class="chip">Synthetic demonstration data</span>
+      <div class="persona" id="persona">
+        <button data-p="md" class="on">Managing Director</button>
+        <button data-p="cfo">CFO</button>
+        <button data-p="cio">CIO / CTO</button>
+      </div>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <div class="card hero">
+    <div class="lbl p">The problem</div>
+    <p>Al Noor Holdings has invested <b>$19.57M</b> in AI, but usage dashboards cannot tell leadership whether that spend is creating value. Prompts are not productivity, hours saved are not cash, and adoption is not ROI.</p>
+    <div class="lbl s">The solution</div>
+    <p>AI Value Intelligence follows every dollar from investment to finance-realized value. Today <b>$29.25M</b> of $93.66M potential value is realized: <b>49.5% ROI</b> with ~23-month payback, and <b>$790K</b> a year is recoverable from idle licenses.</p>
+    <div class="lbl a">Our approach</div>
+    <p>We measure every stage of the AI value chain and report value in three tiers: <b>Potential</b>, <b>Demonstrated</b> and <b>Realized</b>. Only Realized counts toward ROI, measured against the full cost of AI. Each of the 84 use cases is ranked Scale, Optimize, Monitor, Reassess or Stop.</p>
+  </div>
+
+  <section>
+    <h2 id="kpiTitle">What the Managing Director sees first</h2>
+    <p class="sub" id="kpiSub">Portfolio value, net benefit and strategic investment decisions.</p>
+    <div class="kpis" id="kpis"></div>
+  </section>
+
+  <section class="card pad">
+    <h2>The value chain we measure</h2>
+    <p class="sub">Activity is a leading indicator. Only the last steps are value.</p>
+    <div class="chain">
+      <span>AI Investment</span><i>→</i><span>Availability</span><i>→</i><span>Adoption</span><i>→</i>
+      <span>Effective Usage</span><i>→</i><span>Operational Improvement</span><i>→</i>
+      <span>Demonstrated Benefit</span><i>→</i><span>Financial Realization</span><i>→</i>
+      <span>Realized Value</span><i>→</i><span>ROI</span>
+    </div>
+  </section>
+
+  <section class="grid2">
+    <div class="card pad">
+      <h2>Where value leaks</h2>
+      <p class="sub">Potential → Demonstrated → Realized. Hover a tier.</p>
+      <div class="funnel">
+        <div class="row" title="What the portfolio could deliver if every use case hit its business case">
+          <div class="bar" style="width:100%;background:#7FB3AF"><span>Potential</span><span>$93.66M</span></div>
+          <div class="note">Business-case ceiling across 84 use cases</div>
+        </div>
+        <div class="row" title="Operational improvement with evidence">
+          <div class="bar" style="width:65.2%;background:var(--teal)"><span>Demonstrated</span><span>$61.07M</span></div>
+          <div class="note">65% of potential evidenced in operations</div>
+        </div>
+        <div class="row" title="Captured benefit that counts toward ROI">
+          <div class="bar" style="width:31.2%;min-width:150px;background:var(--teal-d)"><span>Realized</span><span>$29.25M</span></div>
+          <div class="note">31% realized · <b>$31.8M demonstrated but not yet captured</b></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card pad">
+      <h2>Return by business unit</h2>
+      <p class="sub">Value is concentrated. Most units have not yet earned back their spend.</p>
+      <div class="toggle" id="buToggle">
+        <button data-m="roi" class="on">ROI</button>
+        <button data-m="value">Realized value</button>
+        <button data-m="cost">AI cost</button>
+      </div>
+      <div id="buChart"></div>
+    </div>
+  </section>
+
+  <section class="card pad">
+    <h2>Portfolio decisions</h2>
+    <p class="sub">AI managed as an investment portfolio. Click a decision.</p>
+    <div class="actions" id="actions"></div>
+    <div class="actdesc" id="actdesc"></div>
+  </section>
+
+  <section class="grid2">
+    <div class="card pad">
+      <h2>Top use cases by realized value</h2>
+      <p class="sub">Where AI is already paying back.</p>
+      <table>
+        <thead><tr><th>Use case</th><th>Unit</th><th class="r">Realized</th><th class="r">ROI</th></tr></thead>
+        <tbody>
+          <tr><td>Engineering code completion</td><td>Technology</td><td class="r">$7.87M</td><td class="r">583%</td></tr>
+          <tr><td>Supplier bid comparison</td><td>Procurement</td><td class="r">$4.06M</td><td class="r">1,367%</td></tr>
+          <tr><td>Contact center reply assist</td><td>Customer Service</td><td class="r">$3.58M</td><td class="r">285%</td></tr>
+          <tr><td>AP invoice exception triage</td><td>Finance</td><td class="r">$2.28M</td><td class="r">1,264%</td></tr>
+          <tr><td>Pull request review assist</td><td>Technology</td><td class="r">$2.10M</td><td class="r">328%</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="card pad sim">
+      <h2>What if we reclaim idle licenses?</h2>
+      <p class="sub">2,209 seats are unused or underutilized. Drag to model reclaim.</p>
+      <input type="range" id="reclaim" min="0" max="100" value="100" />
+      <div class="sub" style="margin-top:6px"><span id="reclaimPct">100%</span> of idle seats reclaimed</div>
+      <div class="simout">
+        <div><span>Annual saving</span><b id="simSave">$790K</b></div>
+        <div><span>Portfolio cost</span><b id="simCost">$18.78M</b></div>
+        <div><span>Portfolio ROI</span><b id="simRoi">55.7%</b></div>
+      </div>
+      <p class="sub" style="margin-top:10px">Illustrative. Reclaim lowers cost; it does not create new value.</p>
+    </div>
+  </section>
+
+  <section>
+    <h2>What needs leadership attention</h2>
+    <p class="sub">Generated from the portfolio, in Managing Director order.</p>
+    <div class="insight">Realized value is $29.25M against $19.57M total AI cost — net benefit $9.68M, ROI 49.5%.</div>
+    <div class="insight r">67 use cases are Reassess or Stop, carrying $13.01M of cost but only $2.62M of realized value.</div>
+    <div class="insight w">$31.8M of demonstrated benefit is not yet financially realized. Prioritize process redesign and finance validation — do not book hours saved as cash.</div>
+    <div class="insight w">$16.07M of realized value is not yet finance-validated.</div>
+    <div class="insight">Reassign or reclaim inactive licenses before buying more seats; stage-gate Reassess and Stop use cases before any further scale-up.</div>
+  </section>
+
+  <section>
+    <h2>Principles behind the numbers</h2>
+    <div class="principles">
+      <div class="card"><b>Prompts ≠ productivity</b>Activity is tracked, never counted as value.</div>
+      <div class="card"><b>Hours ≠ cash</b>Saved time is capacity until it is redeployed or finance-validated.</div>
+      <div class="card"><b>Potential ≠ realized</b>Only captured benefit enters ROI.</div>
+      <div class="card"><b>Full cost of AI</b>Licenses, infrastructure, implementation, training, support, security and governance.</div>
+    </div>
+  </section>
+
+  <footer>
+    AI Value Intelligence · Demonstration on synthetic data for fictional Al Noor Holdings PJSC (seed 42).
+    The metric engine is source-agnostic and can be connected to client licensing, usage, cost and finance systems.
+  </footer>
+</main>
+
+<script>
+const fmt = v => v>=1e6 ? '$'+(v/1e6).toFixed(2)+'M' : v>=1e3 ? '$'+Math.round(v/1e3)+'K' : '$'+Math.round(v);
+const pct = v => (v*100).toFixed(1)+'%';
+
+const K = {
+  net_benefit:{k:'Net AI benefit',v:'$9.68M',h:'Realized value minus total AI cost'},
+  portfolio_roi:{k:'Portfolio ROI',v:'49.5%',h:'(Realized − Cost) / Cost'},
+  realized_value:{k:'Realized AI value',v:'$29.25M',h:'Captured benefit that counts toward ROI'},
+  payback_months:{k:'Payback period',v:'~23 mo',h:'Cost / average monthly realized value'},
+  value_realization:{k:'Value realization',v:'31.2%',h:'Realized / Potential'},
+  total_cost:{k:'Total AI investment',v:'$19.57M',h:'Full cost of AI, not just licenses'},
+  finance_validated:{k:'Finance-validated',v:'$13.19M',h:'Realized value signed off by finance'},
+  bcr:{k:'Benefit-cost ratio',v:'1.49×',h:'Realized value per $1 spent'},
+  adoption:{k:'AI adoption',v:'73.7%',h:'4,157 active of 5,642 licensed'},
+  idle:{k:'Idle licenses',v:'2,209',h:'Unused or underutilized seats'},
+  opt:{k:'License saving',v:'$790K',h:'Annual, from reclaim and right-sizing'},
+  fte:{k:'FTE capacity',v:'47.3',h:'88,979 hours — capacity, not cash'}
+};
+const P = {
+  md:{t:'What the Managing Director sees first',s:'Portfolio value, net benefit and strategic investment decisions.',
+      f:['net_benefit','portfolio_roi','realized_value','payback_months','value_realization'],
+      x:['total_cost','opt','adoption','idle','fte']},
+  cfo:{t:'What the CFO sees first',s:'Cash ROI, finance validation and cost discipline.',
+      f:['portfolio_roi','total_cost','finance_validated','bcr','payback_months'],
+      x:['net_benefit','realized_value','opt','idle','value_realization']},
+  cio:{t:'What the CIO / CTO sees first',s:'Adoption, license efficiency and platform cost.',
+      f:['adoption','idle','opt','total_cost','fte'],
+      x:['realized_value','portfolio_roi','net_benefit','payback_months','value_realization']}
+};
+function renderKpis(p){
+  const c=P[p];
+  document.getElementById('kpiTitle').textContent=c.t;
+  document.getElementById('kpiSub').textContent=c.s;
+  document.getElementById('kpis').innerHTML=[...c.f,...c.x].map((key,i)=>{
+    const d=K[key];
+    return `<div class="card kpi ${i<5?'focus':''}"><div class="k">${d.k}</div><div class="v">${d.v}</div><div class="h">${d.h}</div></div>`;
+  }).join('');
+}
+document.querySelectorAll('#persona button').forEach(b=>b.onclick=()=>{
+  document.querySelectorAll('#persona button').forEach(x=>x.classList.remove('on'));
+  b.classList.add('on'); renderKpis(b.dataset.p);
+});
+renderKpis('md');
+
+const BU=[
+  ['Procurement',841036,5848012],['Technology',4325470,11951199],['Finance',1675839,3716616],
+  ['Customer Service',2359288,4632406],['Sales',1442434,1283894],['Internal Audit',372145,265712],
+  ['Marketing',1483887,676029],['Risk & Compliance',611991,170449],['Operations',956587,235278],
+  ['Human Resources',867353,129813],['Legal',1286440,100525],['Corporate',3350787,242742]
+].map(([n,c,v])=>({n,c,v,r:(v-c)/c}));
+function renderBU(m){
+  const key={roi:'r',value:'v',cost:'c'}[m];
+  const rows=[...BU].sort((a,b)=>b[key]-a[key]);
+  const max=Math.max(...rows.map(r=>Math.abs(r[key])));
+  document.getElementById('buChart').innerHTML=rows.map(r=>{
+    const val=r[key], w=Math.max(2,Math.abs(val)/max*100);
+    const col= m==='cost' ? '#4A5560' : val<0 ? 'var(--crimson)' : 'var(--teal)';
+    const lab= m==='roi' ? (val*100).toFixed(0)+'%' : fmt(val);
+    return `<div class="bu"><span>${r.n}</span><div class="track"><div class="fill" style="width:${w}%;background:${col}"></div></div><span class="val">${lab}</span></div>`;
+  }).join('');
+}
+document.querySelectorAll('#buToggle button').forEach(b=>b.onclick=()=>{
+  document.querySelectorAll('#buToggle button').forEach(x=>x.classList.remove('on'));
+  b.classList.add('on'); renderBU(b.dataset.m);
+});
+renderBU('roi');
+
+const A=[
+  ['Scale',11,'var(--forest)','Proven realized value and strong ROI. Expand users, budget and process integration — e.g. engineering code completion, supplier bid comparison, AP invoice triage.'],
+  ['Optimize',5,'var(--teal)','Value is real but cost or adoption is holding it back. Improve enablement, workflow fit or licensing before scaling.'],
+  ['Monitor',1,'#6B7280','Early or stable. Keep measuring; no change in investment yet.'],
+  ['Reassess',15,'var(--amber)','Weak evidence of realized value. Stage-gate review: fix the business case or the process, or move to Stop.'],
+  ['Stop',52,'var(--crimson)','Cost without realized value. Halt spend and redeploy budget and licenses to Scale candidates.']
+];
+function renderActs(i){
+  document.getElementById('actions').innerHTML=A.map((a,j)=>
+    `<button class="act ${i===j?'on':''}" data-i="${j}"><div class="t" style="color:${a[2]}">${a[0]}</div><div class="n">${a[1]}</div><div class="u">use cases</div></button>`).join('');
+  document.getElementById('actdesc').innerHTML=`<b style="color:${A[i][2]}">${A[i][0]} · ${A[i][1]} use cases.</b> ${A[i][3]}`;
+  document.querySelectorAll('.act').forEach(b=>b.onclick=()=>renderActs(+b.dataset.i));
+}
+renderActs(0);
+
+const REAL=29252675, COST=19573258, SAVE=790212;
+const slider=document.getElementById('reclaim');
+function sim(){
+  const p=slider.value/100, s=SAVE*p, c=COST-s;
+  document.getElementById('reclaimPct').textContent=slider.value+'%';
+  document.getElementById('simSave').textContent=fmt(s);
+  document.getElementById('simCost').textContent=fmt(c);
+  document.getElementById('simRoi').textContent=pct((REAL-c)/c);
+}
+slider.oninput=sim; sim();
+</script>
+</body>
+</html>

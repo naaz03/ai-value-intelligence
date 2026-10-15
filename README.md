@@ -77,8 +77,8 @@ The app is responsive: KPIs stack, charts stay full-width, tabs scroll sideways,
 
 1. Laptop and phone must be on the **same Wi-Fi**.
 2. On the laptop: `streamlit run app.py`. Safari should open on the Mac; the server also listens on the LAN for a phone.
-3. In the sidebar, open **Open on a phone** and copy the `http://192.168.x.x:8501` address.
-4. On the phone, paste that URL in Safari or Chrome.
+3. Copy the **Network URL** Streamlit prints in the terminal (`http://192.168.x.x:8501`).
+4. On the phone, open that URL in Safari or Chrome.
 
 If the page does not load: allow incoming connections for Python in macOS **System Settings → Network → Firewall**, or run `streamlit run app.py --server.address 0.0.0.0 --server.port 8501`. `localhost` on the phone will not work — use the laptop’s LAN IP.
 
