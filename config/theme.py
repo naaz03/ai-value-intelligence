@@ -113,6 +113,35 @@ h3 {{ font-size: 1.05rem !important; color: {SLATE}; }}
   font-size: 0.9rem;
   line-height: 1.45;
 }}
+.exec-hero {{
+  background: {CARD};
+  border: 1px solid {LINE};
+  border-left: 4px solid {TEAL};
+  padding: 1rem 1.15rem;
+  margin: 0.2rem 0 1rem 0;
+}}
+.exec-hero-label {{
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  font-weight: 600;
+  color: {CRIMSON};
+}}
+.exec-hero-solution {{
+  color: {TEAL};
+  margin-top: 0.7rem;
+}}
+.exec-hero-approach {{
+  color: {AMBER};
+  margin-top: 0.7rem;
+}}
+.exec-hero-text {{
+  font-family: "Source Serif 4", Georgia, serif;
+  font-size: 1.05rem;
+  line-height: 1.5;
+  color: {CHARCOAL};
+  margin-top: 0.2rem;
+}}
 .insight-attn {{
   border-left-color: {AMBER};
 }}
@@ -223,6 +252,8 @@ footer {{ visibility: hidden; }}
     padding-right: 1rem;
   }}
   .avi-brand {{ font-size: 1.15rem; }}
+  .exec-hero {{ padding: 0.85rem 0.9rem; }}
+  .exec-hero-text {{ font-size: 0.95rem; }}
   .kpi-card {{ padding: 0.7rem 0.75rem; }}
   .kpi-label {{ font-size: 0.66rem; }}
   .kpi-value {{ font-size: 1.15rem; }}

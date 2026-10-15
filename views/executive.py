@@ -6,9 +6,9 @@ from components.charts import bar_rank, bubble, funnel, line_trend
 from components.executive_insights import render_insights
 from components.filters import current_filters, current_persona
 from components.kpi_cards import kpi_grid
-from components.layout import page_note
 from components.tables import download_csv, styled_table
 from config.constants import PERSONAS, VALUE_CHAIN
+from config.settings import SETTINGS
 from services.metric_service import (
     investment_value_trend,
     portfolio_kpis,
@@ -22,9 +22,37 @@ def render() -> None:
     filters = current_filters()
     persona = current_persona()
     k = portfolio_kpis(filters)
-    page_note(
-        "Investment does not equal value. This overview keeps Potential, Demonstrated, and Realized "
-        "benefits distinct and never books hours saved as cash."
+    perf = usecase_performance(filters)
+    st.markdown(
+        f"""
+<div class="exec-hero">
+  <div class="exec-hero-label">The problem</div>
+  <div class="exec-hero-text">
+    {SETTINGS.organization_name} has invested <b>{format_currency(k["total_cost"])}</b> in AI,
+    but usage dashboards cannot tell leadership whether that spend is creating value.
+    Prompts are not productivity, hours saved are not cash, and adoption is not ROI.
+  </div>
+  <div class="exec-hero-label exec-hero-solution">The solution</div>
+  <div class="exec-hero-text">
+    AI Value Intelligence follows every dollar from investment to finance-realized value.
+    Today <b>{format_currency(k["realized_value"])}</b> of
+    {format_currency(k["potential_value"])} potential value is realized:
+    <b>{format_percent(k["portfolio_roi"])} ROI</b> with
+    ~{k["payback_months"]:.0f}-month payback, and
+    <b>{format_currency(k["optimization_opportunity"])}</b> is recoverable from idle licenses.
+  </div>
+  <div class="exec-hero-label exec-hero-approach">Our approach</div>
+  <div class="exec-hero-text">
+    We measure every stage of the AI value chain, from investment and adoption to effective usage,
+    operational improvement, and financial realization. Value is reported in three tiers:
+    <b>Potential</b>, <b>Demonstrated</b>, and <b>Realized</b>. Only Realized counts toward ROI,
+    and it is measured against the full cost of AI (licenses, infrastructure, implementation,
+    training, support, security, and governance). Each of the {len(perf)} use cases is then
+    ranked as Scale, Optimize, Monitor, Reassess, or Stop.
+  </div>
+</div>
+""",
+        unsafe_allow_html=True,
     )
     st.markdown(
         '<div class="chain-step">' + " → ".join(VALUE_CHAIN) + "</div>",
@@ -126,7 +154,6 @@ def render() -> None:
         roi_bu["roi"] = (roi_bu["realized_value"] - roi_bu["total_cost"]) / roi_bu["total_cost"].replace(0, 1)
         st.plotly_chart(bar_rank(roi_bu, "business_unit_name", "roi", "ROI by business unit"), width="stretch")
 
-    perf = usecase_performance(filters)
     if not perf.empty:
         t1, t2 = st.columns(2)
         with t1:
