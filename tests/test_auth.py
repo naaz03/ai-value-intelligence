@@ -94,5 +94,21 @@ def test_daily_audit_file(tmp_path, monkeypatch):
     text = read_audit_log(today)
     assert "LOGIN_SUCCESS" in text
     assert "tester.one" in text
+    assert "ip=" in text
+    assert "system=" in text
+    assert "timezone=" in text
+    assert "locale=" in text
+    assert "user_agent=" in text
     assert "secret" not in text
     assert today in list_audit_dates()
+
+
+def test_system_parser_from_user_agent():
+    from auth.audit import _parse_system
+
+    assert "macOS" in _parse_system(
+        "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 Chrome/120.0.0.0 Safari/537.36"
+    )
+    assert "Mobile" in _parse_system(
+        "Mozilla/5.0 (iPhone; CPU iPhone OS 17_0 like Mac OS X) AppleWebKit/605.1.15 Version/17.0 Mobile/15E148 Safari/604.1"
+    )

@@ -24,7 +24,7 @@ def render() -> None:
 
     page_note(
         "Review tester accounts and daily login audit files. New signups always receive the user role. "
-        "Passwords are never stored or displayed."
+        "Passwords are never stored or displayed. Audit lines include IP, system/browser, timezone, and locale when available."
     )
     store = get_user_store()
     users = store.list_users()

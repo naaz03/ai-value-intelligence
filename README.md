@@ -91,7 +91,7 @@ Analytical tables ship as portable `data/generated/*.json.gz` (Parquet optional)
 
 - New signups always receive the `user` role.
 - Admin is prompted to change the first-time password on first login. Admin can also change their own password later from **Account**, or reset any tester password from **Admin Console**.
-- Daily audit files are written to `data/user_login_audit/YYYY-MM-DD.log` (login, signup, logout, password changes, page views).
+- Daily audit files are written to `data/user_login_audit/YYYY-MM-DD.log` (login, signup, logout, password changes, page views), including IP, system/browser, timezone, locale, and user-agent when Streamlit exposes them.
 
 ### View on a phone
 
