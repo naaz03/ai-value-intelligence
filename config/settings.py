@@ -29,6 +29,8 @@ class Settings(BaseModel):
     inactive_thresholds_days: tuple[int, int, int] = (30, 60, 90)
     admin_username: str = "naaz.afrin"
     admin_display_name: str = "Naaz Afrin"
+    developer_username: str = "naaz.afrin"
+    developer_name: str = "Naaz Afrin"
 
 
 SETTINGS = Settings()

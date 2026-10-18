@@ -71,6 +71,11 @@ h3 {{ font-size: 1.05rem !important; color: {SLATE}; }}
   letter-spacing: 0.06em;
   margin-top: 0.55rem;
 }}
+.avi-developer {{
+  font-size: 0.7rem;
+  color: {MUTED};
+  margin-top: 0.35rem;
+}}
 .avi-user-name {{
   font-size: 0.88rem;
   font-weight: 600;

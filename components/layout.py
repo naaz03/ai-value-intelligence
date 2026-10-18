@@ -32,6 +32,10 @@ def bootstrap_page(page_title: str, show_filters: bool = True) -> None:
         st.markdown(f'<div class="avi-brand">{SETTINGS.app_name}</div>', unsafe_allow_html=True)
         st.markdown(f'<div class="avi-subtitle">{SETTINGS.app_subtitle}</div>', unsafe_allow_html=True)
         st.markdown(f'<div class="avi-org">{SETTINGS.organization_name}</div>', unsafe_allow_html=True)
+        st.markdown(
+            f'<div class="avi-developer">Developed by {SETTINGS.developer_name} · {SETTINGS.developer_username}</div>',
+            unsafe_allow_html=True,
+        )
         render_sidebar_identity()
         st.divider()
         if show_filters:

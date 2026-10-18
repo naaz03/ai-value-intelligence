@@ -107,6 +107,10 @@ def _setup_auth_screen(title: str) -> None:
         st.markdown(f'<div class="avi-brand">{SETTINGS.app_name}</div>', unsafe_allow_html=True)
         st.markdown(f'<div class="avi-subtitle">{SETTINGS.app_subtitle}</div>', unsafe_allow_html=True)
         st.markdown(f'<div class="avi-org">{SETTINGS.organization_name}</div>', unsafe_allow_html=True)
+        st.markdown(
+            f'<div class="avi-developer">Developed by {SETTINGS.developer_name} · {SETTINGS.developer_username}</div>',
+            unsafe_allow_html=True,
+        )
 
 
 def _render_login_page() -> None:

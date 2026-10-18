@@ -2,6 +2,8 @@
 
 **Measure Adoption. Prove Value. Optimize AI Investment.**
 
+Developed by **Naaz Afrin** (`naaz.afrin`).
+
 Enterprise platform for understanding whether spend on Generative AI, Microsoft Copilot, GitHub Copilot, enterprise LLMs, and AI agents is producing measurable business value.
 
 The first release runs entirely on a high-quality **synthetic** dataset for a fictional GCC holding company, **Al Noor Holdings PJSC**. No API keys are required. The metric engine is source-agnostic so synthetic tables can later be replaced by enterprise systems.
