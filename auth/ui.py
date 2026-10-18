@@ -116,8 +116,7 @@ def _setup_auth_screen(title: str) -> None:
 def _render_login_page() -> None:
     _setup_auth_screen("Sign in")
     st.title("Sign in")
-    st.caption("Testers create their own account. New accounts receive the user role.")
-    st.caption(f"Admin first login: username `{SETTINGS.admin_username}` with the same value as the password, then change it.")
+    st.caption("Sign-up for first time use.")
 
     login_tab, signup_tab = st.tabs(["Log in", "Sign up"])
     store = get_user_store()
