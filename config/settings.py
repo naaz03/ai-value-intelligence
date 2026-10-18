@@ -22,9 +22,13 @@ class Settings(BaseModel):
     default_realization_factor: float = 0.35
     generated_dir: Path = Field(default_factory=lambda: PROJECT_ROOT / "data" / "generated")
     reference_dir: Path = Field(default_factory=lambda: PROJECT_ROOT / "data" / "reference")
+    users_path: Path = Field(default_factory=lambda: PROJECT_ROOT / "data" / "users" / "users.json")
+    audit_dir: Path = Field(default_factory=lambda: PROJECT_ROOT / "data" / "user_login_audit")
     duckdb_path: Path = Field(default_factory=lambda: PROJECT_ROOT / "data" / "generated" / "ai_value.duckdb")
     forecast_horizon_months: int = 24
     inactive_thresholds_days: tuple[int, int, int] = (30, 60, 90)
+    admin_username: str = "naaz.afrin"
+    admin_display_name: str = "Naaz Afrin"
 
 
 SETTINGS = Settings()

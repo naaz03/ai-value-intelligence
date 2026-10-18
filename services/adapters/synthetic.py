@@ -7,7 +7,7 @@ from services.data_service import read_table
 
 
 class SyntheticAdapter:
-    """Reads locally generated Parquet / DuckDB tables."""
+    """Reads locally generated JSON.gz / Parquet tables (DuckDB optional)."""
 
     name = "synthetic_al_noor"
 
@@ -46,4 +46,4 @@ class SyntheticAdapter:
 
     @property
     def source_path(self):
-        return SETTINGS.duckdb_path
+        return SETTINGS.generated_dir

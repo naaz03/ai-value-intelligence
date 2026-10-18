@@ -71,6 +71,17 @@ h3 {{ font-size: 1.05rem !important; color: {SLATE}; }}
   letter-spacing: 0.06em;
   margin-top: 0.55rem;
 }}
+.avi-user-name {{
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: {CHARCOAL};
+  margin-top: 0.75rem;
+}}
+.avi-user-meta {{
+  font-size: 0.72rem;
+  color: {MUTED};
+  margin: 0.15rem 0 0.55rem 0;
+}}
 
 .kpi-card {{
   background: {CARD};

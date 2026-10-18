@@ -3,15 +3,19 @@ from __future__ import annotations
 from functools import lru_cache
 from pathlib import Path
 
-import duckdb
 import pandas as pd
 
 from config.settings import SETTINGS
 from models.schemas import FilterState
+from services.storage import duckdb_available, get_duckdb, read_table_frame, table_exists
+
+
+REQUIRED_BOOTSTRAP_TABLE = "mart_month_enterprise"
 
 
 def data_ready() -> bool:
-    return SETTINGS.duckdb_path.exists() and (SETTINGS.generated_dir / "mart_month_enterprise.parquet").exists()
+    """Ready when portable JSON/Parquet marts exist. DuckDB is optional."""
+    return table_exists(REQUIRED_BOOTSTRAP_TABLE)
 
 
 def ensure_data() -> None:
@@ -24,15 +28,21 @@ def ensure_data() -> None:
 
 def read_table(name: str) -> pd.DataFrame:
     ensure_data()
-    path = SETTINGS.generated_dir / f"{name}.parquet"
-    if not path.exists():
-        raise FileNotFoundError(f"Missing generated table {name}: {path}")
-    frame = pd.read_parquet(path)
+    frame = read_table_frame(name)
     return _normalize_dates(frame)
 
 
 def _normalize_dates(frame: pd.DataFrame) -> pd.DataFrame:
-    for col in ("date", "month", "assigned_date", "start_date", "join_date", "ai_training_date", "last_active_date", "as_of_date"):
+    for col in (
+        "date",
+        "month",
+        "assigned_date",
+        "start_date",
+        "join_date",
+        "ai_training_date",
+        "last_active_date",
+        "as_of_date",
+    ):
         if col in frame.columns:
             frame[col] = pd.to_datetime(frame[col], errors="coerce")
     return frame
@@ -63,9 +73,46 @@ def cached_tables() -> dict[str, pd.DataFrame]:
     return {name: read_table(name) for name in names}
 
 
-def duckdb_connect() -> duckdb.DuckDBPyConnection:
+def duckdb_connect():
+    """Open DuckDB when installed; otherwise raise a clear error for callers that need it."""
     ensure_data()
-    return duckdb.connect(str(SETTINGS.duckdb_path), read_only=True)
+    if not duckdb_available():
+        raise RuntimeError("DuckDB is not available in this environment.")
+    duckdb = get_duckdb()
+    if SETTINGS.duckdb_path.exists():
+        return duckdb.connect(str(SETTINGS.duckdb_path), read_only=True)
+    # Build an in-memory DuckDB view from portable files when the .duckdb file was not shipped.
+    con = duckdb.connect()
+    for name in (
+        "ai_usage",
+        "organizations",
+        "business_units",
+        "departments",
+        "employees",
+        "ai_products",
+        "licenses",
+        "ai_use_cases",
+        "financial_benefits",
+        "ai_costs",
+    ):
+        if table_exists(name):
+            frame = read_table(name)
+            con.register(name, frame)
+    return con
+
+
+def sample_usage_rows(n: int = 400) -> pd.DataFrame:
+    """Sample active usage rows without requiring DuckDB."""
+    usage = read_table("ai_usage")
+    if usage.empty:
+        return usage
+    if "active_flag" in usage.columns:
+        active = usage[usage["active_flag"] == True]  # noqa: E712
+        if not active.empty:
+            usage = active
+    if len(usage) <= n:
+        return usage.reset_index(drop=True)
+    return usage.sample(n=n, random_state=SETTINGS.seed).reset_index(drop=True)
 
 
 def filter_options() -> dict[str, list]:

@@ -34,8 +34,9 @@ CEO / Executive Committee, CFO, CIO / CTO, Chief AI Officer, Business Unit Head,
 
 ```
 ai_audit/
-  app.py                    Streamlit home (Executive Overview)
-  pages/                    12 analytical pages
+  app.py                    Streamlit home (sign-in gate + navigation)
+  auth/                     Native Streamlit login, signup, roles, audit
+  pages/                    Analytical pages plus Account and Admin Console
   views/                    Page renderers
   components/               Filters, KPI cards, charts, tables, insights
   services/                 Metric, ROI, optimization, forecast, insight engines
@@ -43,11 +44,13 @@ ai_audit/
   generators/               Story-driven synthetic enterprise
   models/                   Pydantic contracts
   config/                   Settings, reference data, theme
-  data/generated/           Parquet + DuckDB (created on first run)
-  tests/                    ROI, metrics, data-quality tests
+  data/generated/           JSON.gz (+ Parquet); DuckDB optional
+  data/users/               Hashed user store (created on first run)
+  data/user_login_audit/    Daily login and access logs
+  tests/                    ROI, metrics, data-quality, auth tests
 ```
 
-**Stack:** Python 3.10+ (3.11 recommended), Streamlit, Pandas, NumPy, Plotly, DuckDB, PyArrow, Pydantic, scikit-learn (forecasting), pytest.
+**Stack:** Python 3.10+ (3.11 recommended), Streamlit, Pandas, NumPy, Plotly, PyArrow, Pydantic, scikit-learn (forecasting), pytest. DuckDB is optional.
 
 Facts are monthly. Large employee-level usage is stored in Parquet/DuckDB; pages query pre-aggregated marts.
 
@@ -69,7 +72,24 @@ python -m generators.generate_all
 streamlit run app.py
 ```
 
-Open the URL Streamlit prints (typically http://localhost:8501).
+Open the URL Streamlit prints (typically http://localhost:8501). The app asks testers to sign in before any page opens.
+
+### Authentication for testers
+
+This is a Streamlit-native username/password gate (not OIDC). Passwords are stored only as PBKDF2-SHA256 hashes in `data/users/users.json`.
+
+No `.env` file is required for local or Streamlit Community Cloud deploys. See `.env.example`.
+
+Analytical tables ship as portable `data/generated/*.json.gz` (Parquet optional). DuckDB is not required on Streamlit Cloud.
+
+| Account | Username | First-time password | Role |
+| --- | --- | --- | --- |
+| Admin | `naaz.afrin` | `naaz.afrin` | `admin` |
+| Testers | choose during **Sign up** | choose during signup | `user` |
+
+- New signups always receive the `user` role.
+- Admin is prompted to change the first-time password on first login. Admin can also change their own password later from **Account**, or reset any tester password from **Admin Console**.
+- Daily audit files are written to `data/user_login_audit/YYYY-MM-DD.log` (login, signup, logout, password changes, page views).
 
 ### View on a phone
 
@@ -90,8 +110,9 @@ python -m generators.generate_all
 
 Generation is deterministic (seed `42`). Output:
 
-- `data/generated/*.parquet`
-- `data/generated/ai_value.duckdb`
+- `data/generated/*.json.gz` (portable primary format)
+- `data/generated/*.parquet` (optional cache)
+- `data/generated/ai_value.duckdb` (optional, only if DuckDB is installed)
 - `data/generated/manifest.json`
 
 ## Data model
@@ -174,6 +195,7 @@ pytest -q
 - `tests/test_roi.py` — ROI, payback, BCR, realization factor
 - `tests/test_metrics.py` — KPI reconciliation, value hierarchy, hours ≠ cash
 - `tests/test_data_quality.py` — keys, FKs, enums, P≥D≥R, scale bounds
+- `tests/test_auth.py` — hashed passwords, default user role, admin seed, daily audit files
 
 ## Future integrations
 
@@ -199,7 +221,7 @@ Do not treat the synthetic adapter as a live connector. Implement `services.adap
 - Monthly grain; no true daily telemetry.
 - Productivity is sampled, not a census of every employee-task.
 - Forecasts are trend scenarios, not predictions.
-- No authentication, row-level security, or write-back.
+- Authentication is a local tester gate, not enterprise SSO or row-level security.
 - Currency is USD for vendor-comparable AI spend.
 
 ## License

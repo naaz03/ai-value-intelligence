@@ -1,0 +1,357 @@
+{
+  "storage": {
+    "primary": "json.gz",
+    "parquet": "optional",
+    "duckdb": "optional"
+  },
+  "tables": {
+    "ai_costs": {
+      "rows": 1718,
+      "columns": [
+        "month",
+        "use_case_id",
+        "department_id",
+        "business_unit_id",
+        "license_cost",
+        "infrastructure_cost",
+        "implementation_cost",
+        "support_cost",
+        "training_cost",
+        "security_cost",
+        "governance_cost",
+        "total_cost"
+      ]
+    },
+    "ai_products": {
+      "rows": 6,
+      "columns": [
+        "product_id",
+        "product_name",
+        "vendor",
+        "product_category",
+        "pricing_model",
+        "monthly_unit_cost"
+      ]
+    },
+    "ai_usage": {
+      "rows": 205405,
+      "columns": [
+        "usage_id",
+        "date",
+        "employee_id",
+        "product_id",
+        "department_id",
+        "business_unit_id",
+        "country",
+        "job_level",
+        "active_flag",
+        "sessions",
+        "prompts",
+        "tasks_completed",
+        "tokens_consumed",
+        "estimated_compute_cost",
+        "average_session_minutes",
+        "user_persona"
+      ]
+    },
+    "ai_use_cases": {
+      "rows": 84,
+      "columns": [
+        "use_case_id",
+        "use_case_name",
+        "business_unit",
+        "business_unit_id",
+        "department",
+        "department_id",
+        "business_owner",
+        "technology_owner",
+        "ai_product",
+        "use_case_category",
+        "implementation_cost",
+        "annual_operating_cost",
+        "start_date",
+        "status",
+        "risk_rating",
+        "expected_value",
+        "expected_hours_saved",
+        "target_users",
+        "benefit_type",
+        "evidence_factor",
+        "realization_override",
+        "story",
+        "retire_after",
+        "start_offset"
+      ]
+    },
+    "business_units": {
+      "rows": 12,
+      "columns": [
+        "business_unit_id",
+        "business_unit_name",
+        "executive_owner",
+        "annual_budget",
+        "employee_count"
+      ]
+    },
+    "departments": {
+      "rows": 28,
+      "columns": [
+        "department_id",
+        "department_name",
+        "business_unit_id",
+        "cost_center",
+        "employee_count",
+        "job_family"
+      ]
+    },
+    "employees": {
+      "rows": 12000,
+      "columns": [
+        "employee_id",
+        "department_id",
+        "business_unit_id",
+        "country",
+        "job_level",
+        "job_family",
+        "annual_salary",
+        "hourly_cost",
+        "manager_flag",
+        "ai_training_completed",
+        "ai_training_date",
+        "join_date"
+      ]
+    },
+    "financial_benefits": {
+      "rows": 1718,
+      "columns": [
+        "benefit_id",
+        "use_case_id",
+        "month",
+        "department_id",
+        "business_unit_id",
+        "benefit_type",
+        "potential_value",
+        "demonstrated_value",
+        "realized_value",
+        "finance_validated",
+        "benefit_owner",
+        "hours_saved"
+      ]
+    },
+    "licenses": {
+      "rows": 7446,
+      "columns": [
+        "license_id",
+        "employee_id",
+        "product_id",
+        "assigned_date",
+        "license_status",
+        "monthly_cost"
+      ]
+    },
+    "mart_employee_segment": {
+      "rows": 5642,
+      "columns": [
+        "employee_id",
+        "sessions",
+        "active_flag",
+        "segment",
+        "department_id",
+        "business_unit_id",
+        "job_level",
+        "country",
+        "ai_training_completed",
+        "department_name",
+        "business_unit_name"
+      ]
+    },
+    "mart_license_status": {
+      "rows": 7446,
+      "columns": [
+        "license_id",
+        "employee_id",
+        "product_id",
+        "assigned_date",
+        "license_status",
+        "monthly_cost",
+        "department_id",
+        "business_unit_id",
+        "country",
+        "job_level",
+        "job_family",
+        "annual_salary",
+        "hourly_cost",
+        "manager_flag",
+        "ai_training_completed",
+        "ai_training_date",
+        "join_date",
+        "last_active_date",
+        "active_months",
+        "recent_sessions",
+        "recent_active_months",
+        "days_inactive",
+        "segment",
+        "annual_cost",
+        "product_name",
+        "vendor",
+        "department_name",
+        "business_unit_name",
+        "as_of_date",
+        "product_count"
+      ]
+    },
+    "mart_month_bu": {
+      "rows": 364,
+      "columns": [
+        "month",
+        "business_unit_id",
+        "business_unit_name",
+        "potential_value",
+        "demonstrated_value",
+        "realized_value",
+        "total_cost",
+        "license_cost",
+        "infrastructure_cost",
+        "hours_saved",
+        "finance_validated_value",
+        "active_users",
+        "licensed_users",
+        "sessions",
+        "tasks_completed"
+      ]
+    },
+    "mart_month_department": {
+      "rows": 778,
+      "columns": [
+        "month",
+        "department_id",
+        "business_unit_id",
+        "potential_value",
+        "demonstrated_value",
+        "realized_value",
+        "total_cost",
+        "license_cost",
+        "infrastructure_cost",
+        "hours_saved",
+        "finance_validated_value",
+        "active_users",
+        "licensed_users",
+        "sessions",
+        "prompts",
+        "tasks_completed",
+        "tokens_consumed",
+        "compute_cost",
+        "department_name",
+        "business_unit_name"
+      ]
+    },
+    "mart_month_enterprise": {
+      "rows": 34,
+      "columns": [
+        "month",
+        "potential_value",
+        "demonstrated_value",
+        "realized_value",
+        "total_cost",
+        "license_cost",
+        "infrastructure_cost",
+        "hours_saved",
+        "finance_validated_value",
+        "active_users",
+        "licensed_users",
+        "sessions",
+        "tasks_completed"
+      ]
+    },
+    "mart_month_product": {
+      "rows": 216,
+      "columns": [
+        "month",
+        "product_id",
+        "sessions",
+        "tasks_completed",
+        "tokens_consumed",
+        "compute_cost",
+        "active_users",
+        "licensed_users",
+        "potential_value",
+        "demonstrated_value",
+        "realized_value",
+        "total_cost",
+        "product_name",
+        "vendor"
+      ]
+    },
+    "mart_month_usecase": {
+      "rows": 1718,
+      "columns": [
+        "benefit_id",
+        "use_case_id",
+        "month",
+        "department_id",
+        "business_unit_id",
+        "benefit_type",
+        "potential_value",
+        "demonstrated_value",
+        "realized_value",
+        "finance_validated",
+        "benefit_owner",
+        "hours_saved",
+        "license_cost",
+        "infrastructure_cost",
+        "implementation_cost_x",
+        "support_cost",
+        "training_cost",
+        "security_cost",
+        "governance_cost",
+        "total_cost",
+        "use_case_name",
+        "status",
+        "risk_rating",
+        "ai_product",
+        "expected_value",
+        "implementation_cost_y",
+        "story",
+        "implementation_cost",
+        "department_name",
+        "business_unit_name",
+        "product_name",
+        "vendor",
+        "finance_validated_value",
+        "hours_saved_ops"
+      ]
+    },
+    "organizations": {
+      "rows": 1,
+      "columns": [
+        "organization_id",
+        "organization_name",
+        "country",
+        "industry",
+        "employee_count",
+        "annual_revenue",
+        "ai_strategy_maturity"
+      ]
+    },
+    "productivity_metrics": {
+      "rows": 19072,
+      "columns": [
+        "date",
+        "employee_id",
+        "use_case_id",
+        "department_id",
+        "baseline_task_minutes",
+        "ai_assisted_task_minutes",
+        "tasks_completed",
+        "hours_saved",
+        "quality_before",
+        "quality_after",
+        "rework_before",
+        "rework_after",
+        "hourly_cost"
+      ]
+    }
+  },
+  "duckdb_available": true,
+  "exported_from_existing_parquet": true
+}

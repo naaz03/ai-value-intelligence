@@ -1,11 +1,9 @@
 from __future__ import annotations
 
-import json
 import sys
 from datetime import date
 from pathlib import Path
 
-import duckdb
 import numpy as np
 import pandas as pd
 
@@ -22,6 +20,7 @@ from generators.productivity_generator import generate_productivity
 from generators.quality import run_quality_checks
 from generators.usage_generator import generate_usage
 from generators.use_case_generator import generate_use_cases
+from services.storage import duckdb_available, write_duckdb_if_available, write_manifest, write_table
 from utils.helpers import ensure_generated_dir, month_starts
 
 
@@ -398,27 +397,15 @@ def _segment_row(row: pd.Series) -> str:
 def persist(tables: dict[str, pd.DataFrame]) -> Path:
     out = ensure_generated_dir()
     for name, frame in tables.items():
-        path = out / f"{name}.parquet"
-        frame.to_parquet(path, index=False)
+        write_table(name, frame, out)
 
-    db_path = SETTINGS.duckdb_path
-    if db_path.exists():
-        db_path.unlink()
-    wal = Path(str(db_path) + ".wal")
-    if wal.exists():
-        wal.unlink()
-
-    con = duckdb.connect(str(db_path))
-    try:
-        for name in tables:
-            parquet = out / f"{name}.parquet"
-            con.execute(f"CREATE TABLE {name} AS SELECT * FROM read_parquet('{parquet.as_posix()}')")
-    finally:
-        con.close()
-
-    summary = {name: {"rows": int(len(frame)), "columns": list(frame.columns)} for name, frame in tables.items()}
-    (out / "manifest.json").write_text(json.dumps(summary, indent=2), encoding="utf-8")
-    return db_path
+    db_path = write_duckdb_if_available(list(tables.keys()), out)
+    write_manifest(
+        tables,
+        out,
+        extra={"duckdb_written": bool(db_path), "duckdb_available": duckdb_available()},
+    )
+    return db_path or (out / "manifest.json")
 
 
 def generate_and_save(seed: int | None = None) -> dict[str, pd.DataFrame]:
@@ -441,7 +428,10 @@ def main() -> None:
         for item in failed:
             print(f"  - {item.name}: {item.detail}")
         raise SystemExit(1)
-    print(f"\nDuckDB written to {SETTINGS.duckdb_path}")
+    if duckdb_available() and SETTINGS.duckdb_path.exists():
+        print(f"\nDuckDB written to {SETTINGS.duckdb_path}")
+    else:
+        print("\nDuckDB skipped (not installed). Portable JSON.gz + Parquet written under data/generated/.")
 
 
 if __name__ == "__main__":

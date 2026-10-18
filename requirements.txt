@@ -4,9 +4,11 @@ numpy>=1.26.0
 plotly>=5.18.0
 faker>=22.0.0
 scikit-learn>=1.4.0
-duckdb>=0.10.0
 sqlalchemy>=2.0.0
 pydantic>=2.5.0
 pyarrow>=14.0.0
 pytest>=8.0.0
 python-dateutil>=2.8.2
+# duckdb is optional. The app loads portable JSON.gz (and Parquet when available).
+# Install locally if you want the DuckDB explorer/database file:
+# duckdb>=0.10.0

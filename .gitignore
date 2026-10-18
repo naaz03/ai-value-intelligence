@@ -10,7 +10,12 @@ __pycache__/
 .env
 .env.*
 !.env.example
-data/generated/
+# Keep portable generated datasets in git for Streamlit Cloud cold starts.
+# Ignore only heavy/local DuckDB artifacts.
+data/generated/*.duckdb
+data/generated/*.duckdb.wal
+data/users/users.json
+data/user_login_audit/*.log
 *.duckdb
 *.duckdb.wal
 .streamlit/secrets.toml

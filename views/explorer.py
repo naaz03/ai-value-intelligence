@@ -7,7 +7,7 @@ from components.filters import current_filters
 from components.layout import page_note
 from components.tables import download_csv, styled_table
 from generators.quality import run_quality_checks
-from services.data_service import apply_filters, cached_tables, duckdb_connect
+from services.data_service import apply_filters, cached_tables, sample_usage_rows
 from services.metric_service import usecase_mart
 
 
@@ -55,14 +55,8 @@ def render() -> None:
     styled_table(frame.head(500), height=480)
     download_csv(frame, f"{name}.csv")
 
-    if st.checkbox("Sample employee-level usage via DuckDB"):
-        con = duckdb_connect()
-        try:
-            sample = con.execute(
-                "SELECT * FROM ai_usage WHERE active_flag = TRUE USING SAMPLE 400 ROWS"
-            ).df()
-        finally:
-            con.close()
+    if st.checkbox("Sample employee-level usage"):
+        sample = sample_usage_rows(400)
         styled_table(sample)
         download_csv(sample, "usage_sample.csv")
 
